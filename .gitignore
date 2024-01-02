@@ -3,5 +3,7 @@
 *.out
 *.a
 *.o
+*.vscode
+*test*.c
 
 *.DS*
