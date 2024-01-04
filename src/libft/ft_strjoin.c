@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 19:27:47 by tiacovel          #+#    #+#             */
-/*   Updated: 2023/12/22 12:06:12 by tiacovel         ###   ########.fr       */
+/*   Created: 2023/09/06 14:59:06 by tiacovel          #+#    #+#             */
+/*   Updated: 2023/11/22 14:17:06 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*new;
 	int		i;
@@ -50,30 +40,21 @@ char	*ft_strjoin(char *s1, char const *s2)
 	return (new);
 }
 
-char	*ft_strchr(const char *str, int c)
+/* #include <stdio.h>
+int main(void)
 {
-	while ((char)c != *str)
-	{
-		if (!*str)
-			return (NULL);
-		str++;
-	}
-	return ((char *)str);
-}
+	char 	*strs[] = {"How", "are", "you"};
+	char	*sep = " ";
+	int		strNum;
+	char	*str;
 
-void	*ft_calloc(size_t nitems, size_t size)
-{
-	char	*ptr;
-	size_t	i;
+	strNum = sizeof(strs) / sizeof(strs[0]);
+	printf("Number of strings: %d\n", strNum);
+	printf("String length: %d\n", 
+			calculate_total_str_length(strs, strNum, ft_strlen(sep)));
 
-	ptr = malloc(nitems * size);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (i < size * nitems)
-	{
-		ptr[i] = '\0';
-		i++;
-	}
-	return (ptr);
-}
+	str = ft_strjoin(strNum, strs, sep);
+	printf("%s\n", str);
+	free(str);
+	return (0);
+} */

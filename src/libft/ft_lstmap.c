@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 19:28:06 by tiacovel          #+#    #+#             */
-/*   Updated: 2023/12/22 12:05:59 by tiacovel         ###   ########.fr       */
+/*   Created: 2023/11/21 12:30:40 by tiacovel          #+#    #+#             */
+/*   Updated: 2023/11/24 16:27:14 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*newlst;
+	t_list	*newnode;
 
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char *s1, char const *s2);
-char	*ft_strchr(const char *str, int c);
-void	*ft_calloc(size_t nitems, size_t size);
-char	*get_next_line(int fd);
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 20
-# endif
-#endif
+	if (!lst || !f || !del)
+		return (NULL);
+	newlst = NULL;
+	while (lst)
+	{
+		newnode = ft_lstnew(f(lst->content));
+		if (!newnode)
+		{
+			ft_lstclear(&newlst, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&newlst, newnode);
+		lst = lst->next;
+	}
+	return (newlst);
+}
