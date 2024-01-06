@@ -6,12 +6,14 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:41:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/06 12:19:14 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:13:01 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/fdf.h"
 #include "include/libft.h"
+
+void print_buffer(char **buffer);
 
 void	free_buffer(char **buffer)
 {
@@ -36,7 +38,7 @@ int	read_map(char *file)
 	fd = open(file, O_RDWR);
 	if (fd == -1)
 	{
-		printf("ERROR: please check the file name!");
+		ft_printf("ERROR: please check the file name!");
 		close(fd);
 		return(1);
 	}
@@ -64,12 +66,12 @@ void print_buffer(char **buffer)
 
 	i = 0;
 	if (buffer != NULL)
-    {
-        while (buffer[i] != NULL)
-        {
-            printf("%s", buffer[i]);
+	{
+		while (buffer[i] != NULL)
+		{
+			printf("%s", buffer[i]);
 			i++;
-        }
+		}
 		printf("\n");
 	}
 }
