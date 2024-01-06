@@ -6,19 +6,32 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:41:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/04 17:15:47 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/06 12:19:14 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "include/fdf.h"
+#include "include/fdf.h"
 #include "include/libft.h"
-#include <fcntl.h>
-#include <stdio.h>
+
+void	free_buffer(char **buffer)
+{
+	int	i;
+
+	i = 0;
+	while (buffer[i] != NULL)
+	{
+		free(buffer[i]);
+		i++;
+	}
+	free(buffer);
+}
 
 int	read_map(char *file)
 {
 	int		fd;
 	char	*line;
+	char	**buffer;
+	int		i;
 
 	fd = open(file, O_RDWR);
 	if (fd == -1)
@@ -31,7 +44,11 @@ int	read_map(char *file)
 	{
 		line = get_next_line(fd);
 		if (line != NULL)
-			printf("%s", line);
+		{
+			buffer = ft_split(line, ' ');
+			print_buffer(buffer);
+			free_buffer(buffer);
+		}
 		free(line);
 	}
 	close(fd);
@@ -39,6 +56,24 @@ int	read_map(char *file)
 }
 
 // Test the read_map function
+#include <stdio.h>
+
+void print_buffer(char **buffer)
+{
+	int	i;
+
+	i = 0;
+	if (buffer != NULL)
+    {
+        while (buffer[i] != NULL)
+        {
+            printf("%s", buffer[i]);
+			i++;
+        }
+		printf("\n");
+	}
+}
+
 int	main(void)
 {
 	char *file_path = "test_maps/42.fdf";
