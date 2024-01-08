@@ -3,7 +3,8 @@
 *.out
 *.a
 *.o
-
+fdf
 *test*.c
-
+.vscode/
+*.json
 *.DS*

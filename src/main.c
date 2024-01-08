@@ -6,25 +6,32 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:33:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/07 12:39:21 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:51:36 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-#include <stdio.h>
 
-int	handle_input(int keysym, t_mlx_data *data)
+void	display_window(t_mlx_data data)
 {
-	if (keysym == XK_Escape)
+	data.mlx_ptr = mlx_init();
+	if (data.mlx_ptr == NULL)
+		exit (MLX_ERROR);
+	data.mlx_win = mlx_new_window(data.mlx_ptr, 
+			WIN_WIDTH,
+			WIN_HEIGHT,
+			"My first window!");
+	if (data.mlx_win == NULL)
 	{
-		printf("The %d key (ESC) has been pressed\n\n", keysym);
-		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-		exit (1);
+		mlx_destroy_display(data.mlx_ptr);
+		free(data.mlx_ptr);
+		free_raws(data.map);
+		exit (MLX_ERROR);
 	}
-	printf("The %d key has been pressed\n\n", keysym);
-	return (0);
+	mlx_key_hook(data.mlx_win, handle_keyboard_input, &data);
+	mlx_mouse_hook(data.mlx_win, handle_mouse_input, &data);
+	mlx_hook(data.mlx_win, 17, 0, handle_close_button, &data);
+	mlx_loop(data.mlx_ptr);
 }
 
 int	main(int argc, char **argv)
@@ -33,24 +40,10 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("ERROR: please check input arguments!");
+		ft_printf("ERROR: please check input arguments!");
 		return (EXIT_FAILURE);
 	}
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == NULL)
-		return (MLX_ERROR);
-	data.mlx_win = mlx_new_window(data.mlx_ptr, 
-								WIN_WIDTH,
-								WIN_HEIGHT,
-								"My first window!");
-	if (data.mlx_win == NULL)
-	{
-		mlx_destroy_display(data.mlx_ptr);
-		free(data.mlx_ptr);
-		return (MLX_ERROR);
-	}
-	read_map(argv[1]);
-	mlx_key_hook(data.mlx_win, handle_input, &data);
-	mlx_loop(data.mlx_ptr);
+	data.map = read_map(argv[1]);
+	display_window(data);
 	return (0);
 }

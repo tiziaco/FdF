@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.c                                           :+:      :+:    :+:   */
+/*   matrix_old.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:22:29 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/08 18:12:25 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:06:36 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-static t_matrix	*new_node()
+static t_matrix	*new_node(int z)
 {
 	t_matrix	*node;
 
 	node = (t_matrix *)malloc(sizeof(t_matrix));
 	if (!node)
 		return (NULL);
-	node->z = 0;
-	node->color = ft_strdup("#ffffff");
+	node->z = z;
 	node->right = NULL;
 	node->down = NULL;
 	return (node);
 }
 
-static t_matrix	*create_row(int n, t_matrix **mainhead)
+static t_matrix	*create_row(int row_data[], int n, t_matrix **mainhead)
 {
 	t_matrix	*row_head;
 	t_matrix	*right_temp;
@@ -37,7 +36,7 @@ static t_matrix	*create_row(int n, t_matrix **mainhead)
 	j = 0;
 	while (j < n) 
 	{
-		new_ptr = new_node();
+		new_ptr = new_node(row_data[j]);
 		if (!(*mainhead))
 			(*mainhead) = new_ptr;
 		if (!row_head)
@@ -71,7 +70,7 @@ static void	connect_rows(t_matrix *head[], int m)
 	}
 }
 
-t_matrix	*construct_matrix(int m, int n)
+t_matrix	*construct_matrix(int **mat, int m, int n)
 {
 	t_matrix	*mainhead;
 	t_matrix	*head[m];
@@ -81,7 +80,7 @@ t_matrix	*construct_matrix(int m, int n)
 	i = 0;
 	while (i < m)
 	{
-		head[i] = create_row(n, &mainhead);
+		head[i] = create_row(mat[i], n, &mainhead);
 		i++;
 	}
 	connect_rows(head, m);

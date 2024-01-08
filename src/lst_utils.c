@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:38:11 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/07 17:44:19 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:29:19 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,19 @@ void	free_raws(t_raw *raws)
 		free(temp);
 	}
 	free(raws);
+}
+
+int	count_rows(t_raw *lst)
+{
+	int		size;
+	t_raw	*ptr;
+
+	size = 0;
+	ptr = lst;
+	while (ptr != NULL)
+	{
+		size++;
+		ptr = ptr->next;
+	}
+	return (size);
 }
