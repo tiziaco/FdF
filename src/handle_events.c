@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:23:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/08 14:55:33 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:20:28 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	handle_keyboard_input(int keysym, t_mlx_data *data)
 {
-	if (keysym == XK_Escape)
+	if (keysym == XK_r)
+	{
+		color_background(data, 0xff0000);
+	}
+	else if (keysym == XK_Escape)
 	{
 		ft_printf("The %d key (ESC) has been pressed\n\n", keysym);
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
@@ -24,6 +28,8 @@ int	handle_keyboard_input(int keysym, t_mlx_data *data)
 		exit (EXIT_SUCCESS);
 	}
 	ft_printf("The %d key has been pressed\n\n", keysym);
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, 
+							data->img.img_ptr, 0, 0);
 	return (0);
 }
 

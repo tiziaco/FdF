@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/08 18:12:53 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:20:30 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "../include/libft.h"
 
 # define MLX_ERROR	1
-# define WIN_WIDTH	400
-# define WIN_HEIGHT	400
+# define WIN_WIDTH	800
+# define WIN_HEIGHT	800
 
 typedef struct	s_raw
 {
@@ -38,10 +38,20 @@ typedef struct s_node
 	struct s_node	*down;
 } t_matrix;
 
+typedef struct	s_img
+{
+	void	*img_ptr;
+	char	*img_pixels_ptr;
+	int		bits_per_pixel;
+	int		endian;
+	int		line_len;
+} t_img;
+
 typedef struct	data_s
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
+	t_img	img;
 	t_raw	*map;
 }	t_mlx_data;
 
@@ -58,5 +68,7 @@ t_raw	*read_map(char *file_path);
 int	handle_keyboard_input(int keysym, t_mlx_data *data);
 int	handle_mouse_input(int keysym, t_mlx_data *data);
 int handle_close_button(t_mlx_data *data);
+
+void	color_background(t_mlx_data *data, int color);
 
 #endif

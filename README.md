@@ -5,7 +5,7 @@ Install minilibX
 	https://achedeuzot.me/2014/12/20/installer-la-minilibx/
 
 Compile the program on MacOS:
-	gcc -I /usr/X11/include -g -L /usr/X11/lib -lX11 -lmlx -lXext main.c
+	gcc -I /usr/X11/include -g -L /usr/X11/lib -lX11 -lmlx -lXext src/main.c
 	cc main.c libft.a
 
 Compile the program on Linux:

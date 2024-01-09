@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:41:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/08 18:19:32 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:13:02 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_raw	*initialize_map(int fd)
 	return (raws);
 }
 
-t_matrix	parse_map(t_raw *raws)
+/* t_matrix	parse_map(t_raw *raws)
 {
 	t_raw		*raw;
 	t_matrix	*parsed_map;
@@ -91,7 +91,7 @@ t_matrix	parse_map(t_raw *raws)
 			i++;
 		raw = raw->next;
 	}
-}
+} */
 
 t_raw	*read_map(char *file_path)
 {
@@ -111,7 +111,7 @@ t_raw	*read_map(char *file_path)
 }
 
 // Test the read_map function
-#include <stdio.h>
+/* #include <stdio.h>
 
 void print_raw_data(char **buffer)
 {
@@ -150,4 +150,4 @@ int	main(void)
 	free_raws(map);
 	
 	return (0);
-}
+} */
