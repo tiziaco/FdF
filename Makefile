@@ -6,7 +6,7 @@
 #    By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 11:38:10 by tiacovel          #+#    #+#              #
-#    Updated: 2024/01/09 15:40:07 by tiacovel         ###   ########.fr        #
+#    Updated: 2024/01/09 18:43:27 by tiacovel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME = fdf
 LIBFT_DIR = lib/libft
 LIBFT	= lib/libft/libft.a
 
-SRC = src/main.c src/handle_events.c src/map.c src/matrix.c src/lst_utils.c
+SRC =	src/main.c src/handle_events.c src/map.c  src/draw.c \
+		src/matrix.c src/lst_utils.c
 
 OBJ	= $(SRC:.c=.o)
 

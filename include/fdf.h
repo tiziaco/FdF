@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/09 18:20:30 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:05:44 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@
 # include <X11/keysym.h>
 # include "../include/libft.h"
 
-# define MLX_ERROR	1
+# define WIN_NAME	"Fdf - Display"
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	800
+
+# define MLX_ERROR	1
 
 typedef struct	s_raw
 {
@@ -69,6 +71,8 @@ int	handle_keyboard_input(int keysym, t_mlx_data *data);
 int	handle_mouse_input(int keysym, t_mlx_data *data);
 int handle_close_button(t_mlx_data *data);
 
+void	color_pixel(t_mlx_data *data, int x, int y, int color);
 void	color_background(t_mlx_data *data, int color);
+void	plot_line(t_mlx_data *data, int x0, int y0, int x1, int y1);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:23:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/09 18:20:28 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:09:06 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	handle_keyboard_input(int keysym, t_mlx_data *data)
 {
 	if (keysym == XK_r)
-	{
 		color_background(data, 0xff0000);
-	}
+	else if (keysym == XK_d)
+		plot_line(data, 200, 200, 500, 500);
 	else if (keysym == XK_Escape)
 	{
 		ft_printf("The %d key (ESC) has been pressed\n\n", keysym);

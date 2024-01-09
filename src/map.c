@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:41:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/09 15:13:02 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:26:15 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	check_map(t_raw *raws)
 		}
 		raw = raw->next;
 	}
-	ft_printf("Map check OK");
+	ft_printf("Map check OK\n");
 }
 
 t_raw	*initialize_map(int fd)
