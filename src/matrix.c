@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:22:29 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/08 18:12:25 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:38:18 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_matrix	*create_row(int n, t_matrix **mainhead)
 
 	row_head = NULL;
 	j = 0;
-	while (j < n) 
+	while (j < n)
 	{
 		new_ptr = new_node();
 		if (!(*mainhead))

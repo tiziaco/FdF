@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/09 19:05:44 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:35:33 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ typedef struct	s_raw
 	struct s_raw	*next;
 } t_raw;
 
-typedef struct s_node 
+typedef struct	s_node
 {
+	int				x;
+	int				y;
 	int				z;
 	char			*color;
 	struct s_node	*right;
