@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 12:35:33 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:14:07 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@
 # include <X11/keysym.h>
 # include "../include/libft.h"
 
+#include <stdio.h> // Da togliere!!
+
 # define WIN_NAME	"Fdf - Display"
 # define WIN_WIDTH	800
 # define WIN_HEIGHT	800
 
 # define MLX_ERROR	1
+# define BASE_COLOR	"0xffffff"
 
 typedef struct	s_raw
 {
@@ -37,7 +40,7 @@ typedef struct	s_node
 	int				x;
 	int				y;
 	int				z;
-	char			*color;
+	int				color;
 	struct s_node	*right;
 	struct s_node	*down;
 } t_matrix;
@@ -64,10 +67,13 @@ void	add_raw(t_raw **raws, t_raw *new_node);
 void	free_raws(t_raw *raws);
 int		count_rows(t_raw *lst);
 
-t_matrix	*construct_matrix(int m, int n);
+t_matrix	*convert_raws_to_matrix(t_raw *raws);
+t_matrix	*construct_matrix(t_raw **raws);
+t_matrix	*create_row(int i, char **line, t_matrix **mainhead);
 void		free_matrix(t_matrix *matrix);
 
 t_raw	*read_map(char *file_path);
+int ft_hexstr_int(const char *hexstr);
 
 int	handle_keyboard_input(int keysym, t_mlx_data *data);
 int	handle_mouse_input(int keysym, t_mlx_data *data);

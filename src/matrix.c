@@ -5,88 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/06 12:22:29 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 12:38:18 by tiacovel         ###   ########.fr       */
+/*   Created: 2024/01/10 17:52:53 by tiacovel          #+#    #+#             */
+/*   Updated: 2024/01/10 20:44:19 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-static t_matrix	*new_node()
-{
-	t_matrix	*node;
-
-	node = (t_matrix *)malloc(sizeof(t_matrix));
-	if (!node)
-		return (NULL);
-	node->z = 0;
-	node->color = ft_strdup("#ffffff");
-	node->right = NULL;
-	node->down = NULL;
-	return (node);
-}
-
-static t_matrix	*create_row(int n, t_matrix **mainhead)
-{
-	t_matrix	*row_head;
-	t_matrix	*right_temp;
-	t_matrix	*new_ptr;
-	int			j;
-
-	row_head = NULL;
-	j = 0;
-	while (j < n)
-	{
-		new_ptr = new_node();
-		if (!(*mainhead))
-			(*mainhead) = new_ptr;
-		if (!row_head)
-			row_head = new_ptr;
-		else
-			right_temp->right = new_ptr;
-		right_temp = new_ptr;
-		j++;
-	}
-	return (row_head);
-}
-
-static void	connect_rows(t_matrix *head[], int m)
-{
-	t_matrix	*temp1;
-	t_matrix	*temp2;
-	int			i;
-
-	i = 0;
-	while (i < m - 1) 
-	{
-		temp1 = head[i];
-		temp2 = head[i + 1];
-		while (temp1 && temp2)
-		{
-			temp1->down = temp2;
-			temp1 = temp1->right;
-			temp2 = temp2->right;
-		}
-		i++;
-	}
-}
-
-t_matrix	*construct_matrix(int m, int n)
-{
-	t_matrix	*mainhead;
-	t_matrix	*head[m];
-	int			i;
-
-	mainhead = NULL;
-	i = 0;
-	while (i < m)
-	{
-		head[i] = create_row(n, &mainhead);
-		i++;
-	}
-	connect_rows(head, m);
-	return (mainhead);
-}
 
 void	free_matrix(t_matrix *matrix)
 {
@@ -110,10 +34,7 @@ void	free_matrix(t_matrix *matrix)
 	}
 }
 
-// Test the above function
-/* #include <stdio.h>
-
-void display(t_matrix *head)
+void print_matrix(t_matrix *head)
 {
 	t_matrix *rp, *dp = head;
  
@@ -122,7 +43,7 @@ void display(t_matrix *head)
 		rp = dp;
 		while (rp)
 		{
-			printf("%d ",rp->z);
+			printf("%d",rp->z);
 			rp = rp->right;
 		}
 		printf("\n");
@@ -130,30 +51,118 @@ void display(t_matrix *head)
 	}
 }
 
-int main()
+static void	free_split(char **data)
 {
-	int m = 3;
-	int n = 3;
-    int **mat;
+	int	i;
 
-	mat = (int**)malloc(m * sizeof(int*));
-    for (int i = 0; i < m; i++) {
-        mat[i] = (int*)malloc(n * sizeof(int));
-    }
+	i = 0;
+	while (data[i] != NULL)
+	{
+		free(data[i]);
+		i++;
+	}
+	free(data);
+}
 
-    // Initialize matrix data
-    mat[0][0] = 1; mat[0][1] = 2; mat[0][2] = 3;
-    mat[1][0] = 4; mat[1][1] = 5; mat[1][2] = 6;
-    mat[2][0] = 7; mat[2][1] = 8; mat[2][2] = 9;
+char	**parse_data_point(char *node_data)
+{
+	char	**data;
+	char	**buffer;
 
-	t_matrix *head = construct_matrix(mat, m, n);
-	display(head);
-	free_matrix(head);
-	// Freeing the memory allocated for the matrix data
-    for (int i = 0; i < m; i++) {
-        free(mat[i]);
-    }
-    free(mat);
+	data = (char **)malloc(2 * sizeof(char *));
+	if (!data)
+		return NULL;
+	if(ft_strchr(node_data, ',') == NULL)
+	{
+		data[0] = ft_strdup(node_data);
+		data[1] = ft_strdup(BASE_COLOR);
+	}
+	else
+	{
+		buffer = ft_split(node_data, ',');
+		data[0] = ft_strdup(buffer[0]);
+		data[1] = ft_strdup(buffer[1]);
+		free_split(buffer);
+	}
+	return (data);
+}
 
-	return 0;
-} */
+static t_matrix	*new_node(int x, int y, char *node_data)
+{
+	t_matrix	*node;
+	char		**parsed_data;
+
+	node = (t_matrix *)malloc(sizeof(t_matrix));
+	if (!node)
+		return (NULL);
+	parsed_data = parse_data_point(node_data);
+	node->x = x;
+	node->y = y;
+	node->z = ft_atoi(parsed_data[0]);
+	node->color =  ft_hexstr_int(parsed_data[1]);
+	node->right = NULL;
+	node->down = NULL;
+	free(parsed_data[0]);
+	free(parsed_data[1]);
+	free(parsed_data);
+	return (node);
+}
+
+static void	connect_rows(t_matrix *head[], int m)
+{
+	t_matrix	*temp1;
+	t_matrix	*temp2;
+	int			i;
+
+	i = 0;
+	while (i < m - 1) 
+	{
+		temp1 = head[i];
+		temp2 = head[i + 1];
+		while (temp1 && temp2)
+		{
+			temp1->down = temp2;
+			temp1 = temp1->right;
+			temp2 = temp2->right;
+		}
+		i++;
+	}
+}
+
+t_matrix *convert_raws_to_matrix(t_raw *raws)
+{
+	t_matrix *matrix_head = NULL;
+	t_matrix *row_head = NULL;
+	t_raw *current_row;
+	char **raw_data;
+	int	x;
+	int	y;
+
+	y = 0;
+	current_row = raws;
+	while (current_row != NULL)
+	{
+		x = 0;
+		raw_data = current_row->data;
+		while (raw_data[x] != NULL)
+		{
+			t_matrix *current_node = new_node(x, y, raw_data[x]);
+			if (row_head != NULL)
+			{
+				row_head->right = current_node;
+				row_head = row_head->right;
+			} else 
+			{
+				row_head = current_node;
+				matrix_head = row_head;
+			}
+			x++;
+		}
+		current_row = current_row->next;
+		y++;
+	}
+	connect_rows(&matrix_head, 1);
+	printf("\n***TEST***\n");
+	print_matrix(matrix_head);
+	return (matrix_head);
+}

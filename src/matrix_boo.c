@@ -1,42 +1,101 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_old.c                                       :+:      :+:    :+:   */
+/*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:22:29 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 18:04:10 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:34:36 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-static t_matrix	*new_node(int z)
+static t_matrix	*new_node(int x, int y, char **node_data)
 {
 	t_matrix	*node;
 
 	node = (t_matrix *)malloc(sizeof(t_matrix));
 	if (!node)
 		return (NULL);
-	node->z = z;
+	node->x = x;
+	node->y = y;
+	node->z = node_data[0];
+	node->color = node_data[1];
 	node->right = NULL;
 	node->down = NULL;
 	return (node);
 }
 
-static t_matrix	*create_row(int row_data[], int n, t_matrix **mainhead)
+void	add_node_right(t_matrix **raws, t_matrix *new_node)
+{
+	t_matrix	*last;
+
+	if (!new_node)
+		return ;
+	if (!*raws)
+	{
+		*raws = new_node;
+		return ;
+	}
+	last = *raws;
+	while (last && last->right)
+		last = last->right;
+	last->right = new_node;
+}
+
+static void	free_split(char **data)
+{
+	int	i;
+
+	i = 0;
+	while (data[i] != NULL)
+	{
+		free(data[i]);
+		i++;
+	}
+	free(data);
+}
+
+
+char	**parse_data_point(char *node_data)
+{
+	char	**data;
+	char	**buffer;
+
+	data = (char **)malloc(2 * sizeof(char *));
+    if (!data)
+        return NULL;
+	if(ft_strchr(node_data, ',') == NULL)
+	{
+		data[0] = ft_strdup(node_data);
+		data[1] = BASE_COLOR;
+	}
+	else
+	{
+		buffer = ft_split(node_data, ',');
+		data[0] = ft_strdup(buffer[0]);
+		data[1] = ft_strdup(buffer[1]);
+		free_split(buffer);
+	}
+	return (data);
+}
+
+t_matrix	*create_row(int i, char **line, t_matrix **mainhead)
 {
 	t_matrix	*row_head;
 	t_matrix	*right_temp;
 	t_matrix	*new_ptr;
-	int			j;
+	char		**node_data;
+	int			n;
 
 	row_head = NULL;
-	j = 0;
-	while (j < n) 
+	n = 0;
+	while (line[n] != NULL)
 	{
-		new_ptr = new_node(row_data[j]);
+		node_data = parse_point_data(line[n]);
+		new_ptr = new_node(i, n, node_data);
 		if (!(*mainhead))
 			(*mainhead) = new_ptr;
 		if (!row_head)
@@ -44,7 +103,7 @@ static t_matrix	*create_row(int row_data[], int n, t_matrix **mainhead)
 		else
 			right_temp->right = new_ptr;
 		right_temp = new_ptr;
-		j++;
+		n++;
 	}
 	return (row_head);
 }
@@ -70,22 +129,23 @@ static void	connect_rows(t_matrix *head[], int m)
 	}
 }
 
-/* t_matrix	*construct_matrix(int **mat, int m, int n)
+t_matrix	*construct_matrix(t_raw **raws)
 {
 	t_matrix	*mainhead;
-	t_matrix	*head[m];
+	t_matrix	**head;
 	int			i;
 
 	mainhead = NULL;
+	head = (t_matrix **)malloc(m * sizeof(t_matrix *));
 	i = 0;
 	while (i < m)
 	{
-		head[i] = create_row(mat[i], n, &mainhead);
+		head[i] = create_row(n, &mainhead);
 		i++;
 	}
 	connect_rows(head, m);
 	return (mainhead);
-} */
+}
 
 void	free_matrix(t_matrix *matrix)
 {

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:33:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/09 18:41:15 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:10:11 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	display_window(t_mlx_data data)
 int	main(int argc, char **argv)
 {
 	t_mlx_data	data;
+	t_matrix	*map;
 
 	if (argc != 2)
 	{
@@ -47,7 +48,9 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	data.map = read_map(argv[1]);
+	map = convert_raws_to_matrix(data.map);
+	free_matrix(map);
 	display_window(data);
-
+	(void)map;
 	return (0);
 }

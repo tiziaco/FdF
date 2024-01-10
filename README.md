@@ -12,4 +12,4 @@ Compile the program on Linux:
 	gcc src/map.c src/lst_utils.c -Llib/mlx_linux -lmlx_Linux -L/usr/lib -Llib/libft -lft -Ilib/mlx_linux -lXext -lX11 -lm -lz
 
 Check memory leaks MacOS:
-	leaks --atExit -- ./a.out test_map/42.fdf
+	leaks --atExit -- ./fdf test_maps/42.fdf

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map copy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:41:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 18:05:16 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/10 13:31:30 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,27 @@ t_raw	*initialize_map(int fd)
 	close(fd);
 	return (raws);
 }
+
+/* t_matrix	parse_map(t_raw *raws)
+{
+	t_raw		*raw;
+	t_matrix	*parsed_map;
+	int			i;
+
+	raw = raws;
+	parsed_map = construct_matrix(count_rows(raws), count_columns(raws));
+	i = 0;
+	while (raw != NULL)
+	{
+		while (raw->data[i] != NULL)
+			if(ft_strchr(raw->data[i], ',') == NULL)
+			{
+
+			}
+			i++;
+		raw = raw->next;
+	}
+} */
 
 t_raw	*read_map(char *file_path)
 {
