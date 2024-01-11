@@ -6,14 +6,14 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:41:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 18:05:16 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:16:59 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 #include "../include/libft.h"
 
-int	count_columns(t_raw *raws)
+static int	count_columns(t_raw *raws)
 {
     int	count;
 
@@ -23,7 +23,7 @@ int	count_columns(t_raw *raws)
     return (count);
 }
 
-void	check_map(t_raw *raws)
+static void	check_map(t_raw *raws)
 {
 	t_raw	*raw;
 
@@ -48,7 +48,7 @@ void	check_map(t_raw *raws)
 	ft_printf("Map check OK\n");
 }
 
-t_raw	*initialize_map(int fd)
+static t_raw	*initialize_map(int fd)
 {
 	char	*line;
 	t_raw	*raws;

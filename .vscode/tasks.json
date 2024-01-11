@@ -9,14 +9,23 @@
                 "-fansi-escape-codes",
                 "-g",
                 "${file}",
+                "draw.c",
+                "transform.c",
+                "handle_events.c",
+                "lst_utils.c",
+                "map.c",
+                "matrix.c",
+                "utils.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
+                "-I/usr/X11/include",
+                "-L/usr/X11/lib",
+                "-lX11",
                 "-L${fileDirname}/../lib/libft",
                 "-lft",
-                "-I/usr/X11/include",  // Include path for X11
-                "-L/usr/X11/lib",       // Library path for X11
-                "-lX11",                // X11 library
-                "-lmlx"                 // mlx library
+                "-L${fileDirname}/../lib/mlx_linux",
+                "-lmlx",
+                "-lXext"
             ],
             "options": {
                 "cwd": "${fileDirname}"

@@ -6,11 +6,26 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:52:53 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 20:44:19 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:27:19 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+int	count_rows(t_raw *lst)
+{
+	int		size;
+	t_raw	*ptr;
+
+	size = 0;
+	ptr = lst;
+	while (ptr != NULL)
+	{
+		size++;
+		ptr = ptr->next;
+	}
+	return (size);
+}
 
 void	free_matrix(t_matrix *matrix)
 {
@@ -36,8 +51,10 @@ void	free_matrix(t_matrix *matrix)
 
 void print_matrix(t_matrix *head)
 {
-	t_matrix *rp, *dp = head;
- 
+	t_matrix *rp;
+	t_matrix *dp ;
+	
+	dp = head; 
 	while (dp)
 	{
 		rp = dp;
@@ -64,7 +81,7 @@ static void	free_split(char **data)
 	free(data);
 }
 
-char	**parse_data_point(char *node_data)
+static char	**parse_data_point(char *node_data)
 {
 	char	**data;
 	char	**buffer;
@@ -108,7 +125,7 @@ static t_matrix	*new_node(int x, int y, char *node_data)
 	return (node);
 }
 
-static void	connect_rows(t_matrix *head[], int m)
+static void	connect_rows(t_matrix **head, int m)
 {
 	t_matrix	*temp1;
 	t_matrix	*temp2;
@@ -129,40 +146,56 @@ static void	connect_rows(t_matrix *head[], int m)
 	}
 }
 
-t_matrix *convert_raws_to_matrix(t_raw *raws)
+static t_matrix	*create_row(char **row_data, int y, t_matrix **mainhead)
 {
-	t_matrix *matrix_head = NULL;
-	t_matrix *row_head = NULL;
-	t_raw *current_row;
-	char **raw_data;
-	int	x;
-	int	y;
+	t_matrix	*row_head;
+	t_matrix	*right_temp;
+	t_matrix	*new_ptr;
+	int			x;
 
-	y = 0;
-	current_row = raws;
-	while (current_row != NULL)
+	row_head = NULL;
+	right_temp = row_head;
+	x = 0;
+	while (row_data[x] != NULL) 
 	{
-		x = 0;
-		raw_data = current_row->data;
-		while (raw_data[x] != NULL)
-		{
-			t_matrix *current_node = new_node(x, y, raw_data[x]);
-			if (row_head != NULL)
-			{
-				row_head->right = current_node;
-				row_head = row_head->right;
-			} else 
-			{
-				row_head = current_node;
-				matrix_head = row_head;
-			}
-			x++;
-		}
-		current_row = current_row->next;
-		y++;
+		new_ptr = new_node(x, y, row_data[x]);;
+		if (!(*mainhead))
+			(*mainhead) = new_ptr;
+		if (!row_head)
+			row_head = new_ptr;
+		else
+			right_temp->right = new_ptr;
+		right_temp = new_ptr;
+		x++;
 	}
-	connect_rows(&matrix_head, 1);
+	return (row_head);
+}
+
+t_matrix *	convert_raws_to_matrix(char *file_path)
+{
+    t_matrix	*matrix_head;
+    t_raw		*current_row;
+    char		**raw_data;
+    int			y;
+	t_raw		*raws;
+
+	raws = read_map(file_path);
+	t_matrix **head = (t_matrix **)malloc(count_rows(raws) * sizeof(t_matrix *));
+	if (!head)
+    	return(NULL);
+    y = 0;
+	matrix_head = NULL;
+    current_row = raws;
+    while (current_row != NULL)
+    {
+        raw_data = current_row->data;
+		head[y] = create_row(raw_data, y, &matrix_head);
+        y++;
+		current_row = current_row->next;
+    }
+	connect_rows(head, y);
+	free_raws(raws);
 	printf("\n***TEST***\n");
-	print_matrix(matrix_head);
-	return (matrix_head);
+    print_matrix(matrix_head);
+    return (matrix_head);
 }

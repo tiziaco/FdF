@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 20:14:07 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:36:02 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct	s_node
 	int				x;
 	int				y;
 	int				z;
+	int				u;
+	int				v;
 	int				color;
 	struct s_node	*right;
 	struct s_node	*down;
@@ -59,7 +61,7 @@ typedef struct	data_s
 	void	*mlx_ptr;
 	void	*mlx_win;
 	t_img	img;
-	t_raw	*map;
+	t_matrix	*map;
 }	t_mlx_data;
 
 t_raw	*new_raw(char **data);
@@ -67,10 +69,9 @@ void	add_raw(t_raw **raws, t_raw *new_node);
 void	free_raws(t_raw *raws);
 int		count_rows(t_raw *lst);
 
-t_matrix	*convert_raws_to_matrix(t_raw *raws);
-t_matrix	*construct_matrix(t_raw **raws);
-t_matrix	*create_row(int i, char **line, t_matrix **mainhead);
+t_matrix *	convert_raws_to_matrix(char *file_path);
 void		free_matrix(t_matrix *matrix);
+void	transform_nodes(t_matrix *matrix);
 
 t_raw	*read_map(char *file_path);
 int ft_hexstr_int(const char *hexstr);

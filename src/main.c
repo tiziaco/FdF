@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:33:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 20:10:11 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:48:48 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	display_window(t_mlx_data data)
 	{
 		mlx_destroy_display(data.mlx_ptr);
 		free(data.mlx_ptr);
-		free_raws(data.map);
+		free_matrix(data.map);
 		exit (MLX_ERROR);
 	}
 	mlx_key_hook(data.mlx_win, handle_keyboard_input, &data);
@@ -37,7 +37,7 @@ void	display_window(t_mlx_data data)
 	mlx_loop(data.mlx_ptr);
 }
 
-int	main(int argc, char **argv)
+/* int	main(int argc, char **argv)
 {
 	t_mlx_data	data;
 	t_matrix	*map;
@@ -52,5 +52,15 @@ int	main(int argc, char **argv)
 	free_matrix(map);
 	display_window(data);
 	(void)map;
+	return (0);
+} */
+
+int	main()
+{
+	t_mlx_data	data;
+
+	data.map = convert_raws_to_matrix("/Users/tizianoiacovelli/42berlin/core_curriculum/FdF/test_maps/33.fdf");
+	transform_nodes(data.map);
+	display_window(data);
 	return (0);
 }
