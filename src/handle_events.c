@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:23:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/11 16:10:35 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:05:27 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,30 @@ int	handle_keyboard_input(int keysym, t_mlx_data *data)
 {
 	if (keysym == XK_r)
 		color_background(data, 0xff0000);
+	else if (keysym == XK_q)
+		rotate(data, 0, 0, -1);
+	else if (keysym == XK_e)
+		rotate(data, 0, 0, 1);
+	else if (keysym == XK_w)
+		rotate(data, -1, 0, 0);
+	else if (keysym == XK_s)
+		rotate(data, 1, 0, 0);
+	else if (keysym == XK_a)
+		rotate(data, 0, -1, 0);
 	else if (keysym == XK_d)
-		plot_line(data, 200, 200, 500, 500);
+		rotate(data, 0, 1, 0);
+	else if (keysym == XK_Up)
+		move(data, 0, -1);
+	else if (keysym == XK_Down)
+		move(data, 0, 1);
+	else if (keysym == XK_Right)
+		move(data, 1, 0);
+	else if (keysym == XK_Left)
+		move(data, -1, 0);
+	else if (keysym == XK_plus)
+		zoom(data, 1);
+	else if (keysym == XK_minus)
+		zoom(data, -1);
 	else if (keysym == XK_Escape)
 	{
 		ft_printf("The %d key (ESC) has been pressed\n\n", keysym);
@@ -36,6 +58,10 @@ int	handle_keyboard_input(int keysym, t_mlx_data *data)
 int	handle_mouse_input(int keysym, t_mlx_data *data)
 {
 	(void)data;
+	/* if (keysym == 4)
+		zoom(data, -1);
+	else if (keysym == 5)
+		zoom(data, 1); */
 	ft_printf("The %d key has been pressed\n\n", keysym);
 	return (0);
 }

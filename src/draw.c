@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:39:27 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 12:00:22 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:34:37 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static void	plot_line_low(t_mlx_data *data, int x0, int y0, int x1, int y1)
 	}
 	while (x <= x1)
 	{
-		color_pixel(data, x, y, 0xffffff);
+		if (x >= 0 && y >= 0 && x <= WIN_WIDTH && y <= WIN_HEIGHT)
+			color_pixel(data, x, y, 0xffffff);
 		if (D > 0)
 		{
 			y = y + yi;
@@ -81,33 +82,59 @@ static void	plot_line_high(t_mlx_data *data, int x0, int y0, int x1, int y1)
 	}
 	while (y <= y1)
 	{
+		if (x >= 0 && y >= 0 && x <= WIN_WIDTH && y <= WIN_HEIGHT)
+			color_pixel(data, x, y, 0xffffff);
 		if (D > 0)
 		{
 			x = x + xi;
 			D = D + (2 * (dx - dy));
 		} else
 			D = D + 2 * dx;
-		color_pixel(data, x, y, 0xffffff);
 		y++;
 	}
 }
 
-void	plot_line(t_mlx_data *data, int x0, int y0, int x1, int y1)
+void	plot_line(t_mlx_data *data, t_node_bi point_a, t_node_bi point_b)
 {
-	if (abs(y1 - y0) < abs(x1 - x0))
+	if (abs(point_b.y - point_a.y) < abs(point_b.x - point_a.x))
 	{
-		if (x0 > x1) {
-			plot_line_low(data, x1, y1, x0, y0);
+		if (point_a.x > point_b.x) {
+			plot_line_low(data, point_b.x, point_b.y, point_a.x, point_a.y);
 		} else {
-			plot_line_low(data, x0, y0, x1, y1);
+			plot_line_low(data, point_a.x, point_a.y, point_b.x, point_b.y);
 		}
 	} else
 	{
-		if (y0 > y1) {
-			plot_line_high(data, x1, y1, x0, y0);
+		if (point_a.y > point_b.y) {
+			plot_line_high(data, point_b.x, point_b.y, point_a.x, point_a.y);
 		} else {
-			plot_line_high(data, x0, y0, x1, y1);
+			plot_line_high(data, point_a.x, point_a.y, point_b.x, point_b.y);
 		}
 	}
 }
 
+/* void draw_grid(t_mlx_data *data)
+{
+	t_matrix *rp;
+	t_matrix *rp1;
+	t_matrix *dp;
+	t_matrix *dp1;
+	
+	color_background(data, 0x000000);
+	dp = data->map; 
+	while (dp)
+	{
+		rp = dp;
+		while (rp)
+		{
+			rp1 = rp->right;
+			dp1 = rp->down;
+			if (rp1)
+				plot_line(data, rp->proj_coordinates,  rp1->proj_coordinates);
+			if (dp1)
+				plot_line(data, rp->proj_coordinates, dp1->proj_coordinates);
+			rp = rp1;
+		}
+		dp = dp->down;
+	}
+} */

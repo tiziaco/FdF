@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:52:53 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/11 16:27:19 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/12 12:35:15 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,26 @@ void print_matrix(t_matrix *head)
 		printf("\n");
 		dp = dp->down;
 	}
+}
+
+void print_coordinates(t_matrix *head)
+{
+	t_matrix *rp;
+	t_matrix *dp ;
+	
+	dp = head; 
+	while (dp)
+	{
+		rp = dp;
+		while (rp)
+		{
+			printf("%d, %d\t",rp->x, rp->y);
+			rp = rp->right;
+		}
+		printf("\n");
+		dp = dp->down;
+	}
+	printf("\n");
 }
 
 static void	free_split(char **data)
@@ -195,7 +215,7 @@ t_matrix *	convert_raws_to_matrix(char *file_path)
     }
 	connect_rows(head, y);
 	free_raws(raws);
-	printf("\n***TEST***\n");
-    print_matrix(matrix_head);
+	printf("\n*** Object coordinates ***\n");
+    print_coordinates(matrix_head);
     return (matrix_head);
 }

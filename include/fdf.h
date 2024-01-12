@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/11 16:36:02 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:15:43 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,28 @@
 # define MLX_ERROR	1
 # define BASE_COLOR	"0xffffff"
 
+typedef struct {
+	int x, y;
+} t_node_bi;
+
+typedef struct {
+	int x, y, z;
+} t_node_tri;
+
+typedef struct s_view
+{
+	int	rot_x;
+	int	rot_y;
+	int	rot_z;
+	int	zoom;
+} t_view;
+
+typedef struct s_origin
+{
+	int	x0;
+	int	y0;
+} t_origin;
+
 typedef struct	s_raw
 {
 	char			**data;
@@ -40,8 +62,7 @@ typedef struct	s_node
 	int				x;
 	int				y;
 	int				z;
-	int				u;
-	int				v;
+	t_node_bi		proj_coordinates;
 	int				color;
 	struct s_node	*right;
 	struct s_node	*down;
@@ -58,10 +79,12 @@ typedef struct	s_img
 
 typedef struct	data_s
 {
-	void	*mlx_ptr;
-	void	*mlx_win;
-	t_img	img;
+	void		*mlx_ptr;
+	void		*mlx_win;
+	t_img		img;
 	t_matrix	*map;
+	t_view		view;
+	t_origin	origin;
 }	t_mlx_data;
 
 t_raw	*new_raw(char **data);
@@ -71,7 +94,7 @@ int		count_rows(t_raw *lst);
 
 t_matrix *	convert_raws_to_matrix(char *file_path);
 void		free_matrix(t_matrix *matrix);
-void	transform_nodes(t_matrix *matrix);
+void	transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
 
 t_raw	*read_map(char *file_path);
 int ft_hexstr_int(const char *hexstr);
@@ -82,6 +105,11 @@ int handle_close_button(t_mlx_data *data);
 
 void	color_pixel(t_mlx_data *data, int x, int y, int color);
 void	color_background(t_mlx_data *data, int color);
-void	plot_line(t_mlx_data *data, int x0, int y0, int x1, int y1);
+void	plot_line(t_mlx_data *data, t_node_bi point_a, t_node_bi point_b);
+void	draw_grid(t_mlx_data *data);
+
+void	rotate(t_mlx_data *data, int rot_x, int rot_y, int rot_z);
+void	zoom(t_mlx_data *data, int direction);
+void	move(t_mlx_data *data, int tr_x, int tr_y);
 
 #endif

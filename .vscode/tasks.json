@@ -15,6 +15,7 @@
                 "lst_utils.c",
                 "map.c",
                 "matrix.c",
+                "view.c",
                 "utils.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
