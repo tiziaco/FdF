@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:52:53 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/12 12:35:15 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:32:59 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void print_coordinates(t_matrix *head)
 		rp = dp;
 		while (rp)
 		{
-			printf("%d, %d\t",rp->x, rp->y);
+			// printf("%d, %d\t",rp->x, rp->y);
+			printf("%d\t",rp->color);
 			rp = rp->right;
 		}
 		printf("\n");
@@ -191,31 +192,32 @@ static t_matrix	*create_row(char **row_data, int y, t_matrix **mainhead)
 	return (row_head);
 }
 
-t_matrix *	convert_raws_to_matrix(char *file_path)
+t_matrix	*convert_raws_to_matrix(char *file_path)
 {
-    t_matrix	*matrix_head;
-    t_raw		*current_row;
-    char		**raw_data;
-    int			y;
+	t_matrix	*matrix_head;
+	t_raw		*current_row;
+	char		**raw_data;
+	int			y;
 	t_raw		*raws;
 
 	raws = read_map(file_path);
 	t_matrix **head = (t_matrix **)malloc(count_rows(raws) * sizeof(t_matrix *));
 	if (!head)
-    	return(NULL);
-    y = 0;
+		return (NULL);
+	y = 0;
 	matrix_head = NULL;
-    current_row = raws;
-    while (current_row != NULL)
-    {
-        raw_data = current_row->data;
+	current_row = raws;
+	while (current_row != NULL)
+	{
+		raw_data = current_row->data;
 		head[y] = create_row(raw_data, y, &matrix_head);
-        y++;
+		y++;
 		current_row = current_row->next;
-    }
+	}
 	connect_rows(head, y);
 	free_raws(raws);
+	free(head);
 	printf("\n*** Object coordinates ***\n");
-    print_coordinates(matrix_head);
-    return (matrix_head);
+	print_coordinates(matrix_head);
+	return (matrix_head);
 }

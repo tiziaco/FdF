@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:20:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/12 17:01:32 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:33:38 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void print_matrix_uv(t_matrix *head)
 {
-	t_matrix *rp;
-	t_matrix *dp ;
+	t_matrix	*rp;
+	t_matrix	*dp ;
 	
-	dp = head; 
+	dp = head;
 	while (dp)
 	{
 		rp = dp;
@@ -31,23 +31,18 @@ void print_matrix_uv(t_matrix *head)
 	}
 }
 
-/* void calculate_screen_coordinates(t_matrix *node, int distance)
-{
-	node->u = (int)((node->x - node->y) * distance / sqrt(2.0));
-	node->v = (int)(((node->x + node->y - 2 * node->z) * distance) / sqrt(6.0));
-} */
 typedef struct {
 	float m[3][3];
 } t_tr_matrix;
 
-static float deg_to_rad(float degrees)
+static float	deg_to_rad(float degrees)
 {
-	return degrees * (M_PI / 180.0);
+	return (degrees * (M_PI / 180.0));
 }
 
-static t_tr_matrix get_perspective_matrix(float pitch, float yaw, float roll)
+static t_tr_matrix	get_perspective_matrix(float pitch, float yaw, float roll)
 {
-	t_tr_matrix matrix;
+	t_tr_matrix	matrix;
 
 	pitch = deg_to_rad(pitch);
 	yaw = deg_to_rad(yaw);
@@ -65,10 +60,10 @@ static t_tr_matrix get_perspective_matrix(float pitch, float yaw, float roll)
 	matrix.m[2][1] = sin(pitch);
 	matrix.m[2][2] = cos(pitch) * cos(yaw);
 
-	return matrix;
+	return (matrix);
 }
 
-static void get_projected_coord(t_matrix *matrix, t_view view, t_origin origin)
+static void	get_projected_coord(t_matrix *matrix, t_view view, t_origin origin)
 {
 	t_tr_matrix	transformation_matrix;
 	t_node_tri	new_node;

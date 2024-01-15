@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:39:27 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/12 16:34:37 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:21:29 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	plot_line_low(t_mlx_data *data, int x0, int y0, int x1, int y1)
 	}
 	while (x <= x1)
 	{
-		if (x >= 0 && y >= 0 && x <= WIN_WIDTH && y <= WIN_HEIGHT)
+		if (x >= 0 && y >= 0 && x < WIN_WIDTH && y < WIN_HEIGHT)
 			color_pixel(data, x, y, 0xffffff);
 		if (D > 0)
 		{
@@ -82,7 +82,7 @@ static void	plot_line_high(t_mlx_data *data, int x0, int y0, int x1, int y1)
 	}
 	while (y <= y1)
 	{
-		if (x >= 0 && y >= 0 && x <= WIN_WIDTH && y <= WIN_HEIGHT)
+		if (x >= 0 && y >= 0 && x < WIN_WIDTH && y < WIN_HEIGHT)
 			color_pixel(data, x, y, 0xffffff);
 		if (D > 0)
 		{

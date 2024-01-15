@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:33:14 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/10 19:40:02 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:35:05 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 static int	char_int(char c)
 {
 	if (c >= '0' && c <= '9')
-		return c - '0';
+		return (c - '0');
 	else if (c >= 'a' && c <= 'f')
-		return 10 + (c - 'a');
+		return (10 + (c - 'a'));
 	else if (c >= 'A' && c <= 'F')
-		return 10 + (c - 'A');
+		return (10 + (c - 'A'));
 	else
 		return (-1);
 }
