@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/12 17:15:43 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:04:53 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define WIN_HEIGHT	800
 
 # define MLX_ERROR	1
+# define BACKGROUND_COLOR 0x000000
 # define BASE_COLOR	"0xffffff"
 
 typedef struct {
@@ -92,9 +93,10 @@ void	add_raw(t_raw **raws, t_raw *new_node);
 void	free_raws(t_raw *raws);
 int		count_rows(t_raw *lst);
 
-t_matrix *	convert_raws_to_matrix(char *file_path);
+t_matrix	*convert_raws_to_matrix(char *file_path);
 void		free_matrix(t_matrix *matrix);
-void	transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
+void		free_split(char **data);
+void		transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
 
 t_raw	*read_map(char *file_path);
 int ft_hexstr_int(const char *hexstr);
@@ -111,5 +113,6 @@ void	draw_grid(t_mlx_data *data);
 void	rotate(t_mlx_data *data, int rot_x, int rot_y, int rot_z);
 void	zoom(t_mlx_data *data, int direction);
 void	move(t_mlx_data *data, int tr_x, int tr_y);
+void	destroy_window(t_mlx_data *data);
 
 #endif

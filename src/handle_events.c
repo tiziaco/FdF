@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:23:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/12 18:05:27 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:51:03 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	handle_keyboard_input(int keysym, t_mlx_data *data)
 {
-	if (keysym == XK_r)
-		color_background(data, 0xff0000);
-	else if (keysym == XK_q)
+	if (keysym == XK_q)
 		rotate(data, 0, 0, -1);
 	else if (keysym == XK_e)
 		rotate(data, 0, 0, 1);
@@ -43,15 +41,11 @@ int	handle_keyboard_input(int keysym, t_mlx_data *data)
 	else if (keysym == XK_Escape)
 	{
 		ft_printf("The %d key (ESC) has been pressed\n\n", keysym);
-		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-		free_matrix(data->map);
-		exit (EXIT_SUCCESS);
+		destroy_window(data);
 	}
 	ft_printf("The %d key has been pressed\n\n", keysym);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, 
-							data->img.img_ptr, 0, 0);
+							data->img.img_ptr, 150, 0);
 	return (0);
 }
 
@@ -69,10 +63,6 @@ int	handle_mouse_input(int keysym, t_mlx_data *data)
 int	handle_close_button(t_mlx_data *data)
 {
 	ft_printf("The close button has been pressed\n\n");
-	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	free_matrix(data->map);
-	exit (EXIT_SUCCESS);
+	destroy_window(data);
 	return (0);
 }

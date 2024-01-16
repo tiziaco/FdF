@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:16:22 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/12 17:43:38 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:09:20 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void draw_grid(t_mlx_data *data)
 	t_matrix *dp;
 	t_matrix *dp1;
 
-	color_background(data, 0x000000);
+	color_background(data, BACKGROUND_COLOR);
 	dp = data->map; 
 	while (dp)
 	{
@@ -72,4 +72,13 @@ void	move(t_mlx_data *data, int tr_x, int tr_y)
 		data->origin.y0 += 5 * tr_y;
 	transform_nodes(data->map, data->view, data->origin);
 	draw_grid(data);
+}
+
+void	destroy_window(t_mlx_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
+	mlx_destroy_display(data->mlx_ptr);
+	free(data->mlx_ptr);
+	free_matrix(data->map);
+	exit (EXIT_SUCCESS);
 }

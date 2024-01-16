@@ -6,11 +6,36 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:33:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/15 16:00:48 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:50:43 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+void	print_instruction(t_mlx_data data)
+{
+	int		x;
+	int		y;
+	int		i;
+	char	*text;
+	char	**buffer;
+
+	x = 10;
+	y = 20;
+	// Assuming you want to display the text "Hello, MiniLibX!"
+	text = "FdF Instructions:$   Left/Right arrow: move X\
+	$   Up/Down arrow: move Y$   A/D: rotate around X$   W/S: rotate around Y\
+	X$   Q/E: rotate around Z";
+	buffer = ft_split(text, '$');
+	i = 0;
+	while (buffer[i] != NULL)
+	{
+		mlx_string_put(data.mlx_ptr, data.mlx_win, x, y, 0xFF0000, buffer[i]);
+		y += 20;
+		i++;
+	}
+	free_split(buffer);
+}
 
 void	display_window(t_mlx_data data)
 {
@@ -33,7 +58,8 @@ void	display_window(t_mlx_data data)
 	transform_nodes(data.map, data.view, data.origin);
 	draw_grid(&data);
 	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, 
-							data.img.img_ptr, 0, 0);
+							data.img.img_ptr, 150, 0);
+	print_instruction(data);
 	mlx_key_hook(data.mlx_win, handle_keyboard_input, &data);
 	mlx_mouse_hook(data.mlx_win, handle_mouse_input, &data);
 	//mlx_hook(data.mlx_win, 2, 0, handle_keyboard_input, &data);

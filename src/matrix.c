@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:52:53 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/15 16:32:59 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:04:09 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void print_coordinates(t_matrix *head)
 	printf("\n");
 }
 
-static void	free_split(char **data)
+void	free_split(char **data)
 {
 	int	i;
 
