@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:33:14 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/15 14:35:05 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:01:24 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int ft_hexstr_int(const char *hexstr)
 	if (hexstr[0] == '0' && (hexstr[1] == 'x' || hexstr[1] == 'X'))
 		hexstr += 2;
 	result = 0;
-	while (*hexstr != '\0')
+	while (*hexstr != '\0' && *hexstr != '\n')
 	{
 		digit_value = char_int(*hexstr);
 		if (digit_value == -1)

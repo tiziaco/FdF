@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:16:22 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/17 13:13:57 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:30:02 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	move(t_mlx_data *data, int tr_x, int tr_y)
 
 void	destroy_window(t_mlx_data *data)
 {
+	ft_printf("Quitting the program... \n\n");
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);

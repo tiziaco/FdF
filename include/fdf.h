@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/17 15:23:56 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:02:59 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,19 @@
 #include <stdio.h> // Da togliere!!
 
 # define WIN_NAME	"Fdf - Display"
-# define WIN_WIDTH	800
-# define WIN_HEIGHT	800
+# define WIN_WIDTH	1000
+# define WIN_HEIGHT	600
+
+# define IMG_WIDTH	800
+# define IMG_HEIGHT	600
 
 # define MLX_ERROR	1
-# define BACKGROUND_COLOR	0x000000
+
+# define BACKGROUND_COLOR	0x202020
 # define BASE_COLOR			"0x4141FF"
 # define BASE_COLOR_UP		"0x39FF36"
 # define BASE_COLOR_DOWN	"0xE136FF"
+# define TEXT_COLOR			0xffffff
 
 typedef struct	s_color
 {

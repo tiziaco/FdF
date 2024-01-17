@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:39:27 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/17 15:22:37 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:32:07 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	color_pixel(t_mlx_data *data, int x, int y, int color)
 {
 	int	offset;
 
-	if ((x < WIN_WIDTH && y < WIN_HEIGHT) && (x > 0 && y > 0))
+	if ((x < IMG_WIDTH && y < IMG_HEIGHT) && (x > 0 && y > 0))
 	{
 		offset = (data->img.line_len * y) + (x * (data->img.bits_per_pixel / 8));	
 		*((unsigned int *)(offset + data->img.img_pixels_ptr)) = color;
@@ -29,10 +29,10 @@ void	color_background(t_mlx_data *data, int color)
 	int	y;
 
 	y = 0;
-	while (y < WIN_HEIGHT)	
+	while (y < IMG_HEIGHT)	
 	{
 		x = 0;
-		while (x < WIN_WIDTH)
+		while (x < IMG_WIDTH)
 		{
 			color_pixel(data, x, y, color);
 			x++;

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:20:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/17 13:11:26 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:41:11 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,6 @@ void	transform_nodes(t_matrix *matrix, t_view view, t_origin origin)
 		}
 		dp = dp->down;
 	}
-	printf("\n*** Screen coordinates ***\n");
-	print_matrix_uv(matrix);
+	//Fprintf("\n*** Screen coordinates ***\n");
+	//print_matrix_uv(matrix);
 }
