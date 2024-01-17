@@ -17,6 +17,7 @@
                 "matrix.c",
                 "view.c",
                 "utils.c",
+                "color.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-I/usr/X11/include",

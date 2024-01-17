@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:16:22 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/15 17:09:20 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:13:57 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void draw_grid(t_mlx_data *data)
 			rp1 = rp->right;
 			dp1 = rp->down;
 			if (rp1)
-				plot_line(data, rp->proj_coordinates,  rp1->proj_coordinates);
+				plot_line(data, rp, rp1);
 			if (dp1)
-				plot_line(data, rp->proj_coordinates, dp1->proj_coordinates);
+				plot_line(data, rp, dp1);
 			rp = rp1;
 		}
 		dp = dp->down;

@@ -7,5 +7,6 @@ fdf
 *test*.c
 .vscode/
 OLD/
+main
 *.json
 *.DS*

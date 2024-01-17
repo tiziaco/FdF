@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:20:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/15 18:48:15 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:11:26 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void print_matrix_uv(t_matrix *head)
 		rp = dp;
 		while (rp)
 		{
-			printf("%d,%d\t",rp->proj_coordinates.x, rp->proj_coordinates.y);
+			printf("%d,%d\t",rp->pj_cor.x, rp->pj_cor.y);
 			rp = rp->right;
 		}
 		printf("\n");
@@ -101,10 +101,10 @@ static void	get_projected_coord(t_matrix *matrix, t_view view, t_origin origin)
 	new_node.x = matrix->x * view.zoom;
 	new_node.y = matrix->y * view.zoom;
 	new_node.z = matrix->z * view.zoom * 0.5;
-	matrix->proj_coordinates.x = new_node.x * transformation_matrix.m[0][0] + new_node.y * transformation_matrix.m[0][1] + new_node.z * transformation_matrix.m[0][2];
-	matrix->proj_coordinates.y = new_node.x * transformation_matrix.m[1][0] + new_node.y * transformation_matrix.m[1][1] + new_node.z * transformation_matrix.m[1][2];
-	matrix->proj_coordinates.x += origin.x0;
-	matrix->proj_coordinates.y += origin.y0;
+	matrix->pj_cor.x = new_node.x * transformation_matrix.m[0][0] + new_node.y * transformation_matrix.m[0][1] + new_node.z * transformation_matrix.m[0][2];
+	matrix->pj_cor.y = new_node.x * transformation_matrix.m[1][0] + new_node.y * transformation_matrix.m[1][1] + new_node.z * transformation_matrix.m[1][2];
+	matrix->pj_cor.x += origin.x0;
+	matrix->pj_cor.y += origin.y0;
 	free_tr_matrix(transformation_matrix);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:52:53 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/15 18:04:09 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:12:37 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,12 @@ static char	**parse_data_point(char *node_data)
 	if(ft_strchr(node_data, ',') == NULL)
 	{
 		data[0] = ft_strdup(node_data);
-		data[1] = ft_strdup(BASE_COLOR);
+		if (ft_atoi(data[0]) > 0)
+			data[1] = ft_strdup(BASE_COLOR_UP);
+		else if (ft_atoi(data[0]) < 0)
+			data[1] = ft_strdup(BASE_COLOR_DOWN);
+		else
+			data[1] = ft_strdup(BASE_COLOR);
 	}
 	else
 	{

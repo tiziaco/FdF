@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/15 18:04:53 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:23:56 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,29 @@
 # define WIN_HEIGHT	800
 
 # define MLX_ERROR	1
-# define BACKGROUND_COLOR 0x000000
-# define BASE_COLOR	"0xffffff"
+# define BACKGROUND_COLOR	0x000000
+# define BASE_COLOR			"0x4141FF"
+# define BASE_COLOR_UP		"0x39FF36"
+# define BASE_COLOR_DOWN	"0xE136FF"
 
-typedef struct {
-	int x, y;
+typedef struct	s_color
+{
+	int	r;
+	int	g;
+	int	b;
+} t_color;
+
+typedef struct	s_node_bi
+{
+	int	x;
+	int	y;
 } t_node_bi;
 
-typedef struct {
-	int x, y, z;
+typedef struct	s_node_tri
+{
+	int x;
+	int y;
+	int z;
 } t_node_tri;
 
 typedef struct s_view
@@ -63,7 +77,7 @@ typedef struct	s_node
 	int				x;
 	int				y;
 	int				z;
-	t_node_bi		proj_coordinates;
+	t_node_bi		pj_cor;
 	int				color;
 	struct s_node	*right;
 	struct s_node	*down;
@@ -99,15 +113,16 @@ void		free_split(char **data);
 void		transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
 
 t_raw	*read_map(char *file_path);
-int ft_hexstr_int(const char *hexstr);
+int		ft_hexstr_int(const char *hexstr);
 
-int	handle_keyboard_input(int keysym, t_mlx_data *data);
-int	handle_mouse_input(int keysym, t_mlx_data *data);
-int handle_close_button(t_mlx_data *data);
+int		handle_keyboard_input(int keysym, t_mlx_data *data);
+int		handle_mouse_input(int keysym, t_mlx_data *data);
+int		handle_close_button(t_mlx_data *data);
 
+int		get_color(t_matrix *p1, t_matrix *p2, t_node_bi	cur);
 void	color_pixel(t_mlx_data *data, int x, int y, int color);
 void	color_background(t_mlx_data *data, int color);
-void	plot_line(t_mlx_data *data, t_node_bi point_a, t_node_bi point_b);
+void	plot_line(t_mlx_data *data, t_matrix *p1, t_matrix *p2);
 void	draw_grid(t_mlx_data *data);
 
 void	rotate(t_mlx_data *data, int rot_x, int rot_y, int rot_z);

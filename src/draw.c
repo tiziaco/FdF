@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:39:27 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/15 14:21:29 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:22:37 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ void	color_pixel(t_mlx_data *data, int x, int y, int color)
 {
 	int	offset;
 
-	offset = (data->img.line_len * y) + (x * (data->img.bits_per_pixel / 8));	
-	*((unsigned int *)(offset + data->img.img_pixels_ptr)) = color;
+	if ((x < WIN_WIDTH && y < WIN_HEIGHT) && (x > 0 && y > 0))
+	{
+		offset = (data->img.line_len * y) + (x * (data->img.bits_per_pixel / 8));	
+		*((unsigned int *)(offset + data->img.img_pixels_ptr)) = color;
+	}
 }
 
 void	color_background(t_mlx_data *data, int color)
@@ -38,103 +41,53 @@ void	color_background(t_mlx_data *data, int color)
 	}
 }
 
-static void	plot_line_low(t_mlx_data *data, int x0, int y0, int x1, int y1)
+static t_node_bi	get_delta(t_node_bi p1, t_node_bi p2)
 {
-	int dx = x1 - x0;
-	int dy = y1 - y0;
-	int yi = 1;
-	int D = (2 * dy) - dx;
-	int y = y0;
-	int x = x0;
-
-	if (dy < 0)
-	{
-		yi = -1;
-		dy = -dy;
-	}
-	while (x <= x1)
-	{
-		if (x >= 0 && y >= 0 && x < WIN_WIDTH && y < WIN_HEIGHT)
-			color_pixel(data, x, y, 0xffffff);
-		if (D > 0)
-		{
-			y = y + yi;
-			D = D + (2 * (dy - dx));
-		} else
-			D = D + 2 * dy;
-		x++;
-	}
+	t_node_bi	delta;
+	delta.x = abs(p2.x - p1.x);
+	delta.y = -abs(p2.y - p1.y);
+	return (delta);
 }
 
-static void	plot_line_high(t_mlx_data *data, int x0, int y0, int x1, int y1)
+static t_node_bi	get_direction(t_node_bi p1, t_node_bi p2)
 {
-	int dx = x1 - x0;
-	int dy = y1 - y0;
-	int xi = 1;
-	int D = (2 * dx) - dy;
-	int x = x0;
-	int y = y0;
-
-	if (dx < 0)
-	{
-		xi = -1;
-		dx = -dx;
-	}
-	while (y <= y1)
-	{
-		if (x >= 0 && y >= 0 && x < WIN_WIDTH && y < WIN_HEIGHT)
-			color_pixel(data, x, y, 0xffffff);
-		if (D > 0)
-		{
-			x = x + xi;
-			D = D + (2 * (dx - dy));
-		} else
-			D = D + 2 * dx;
-		y++;
-	}
+	t_node_bi	dir;
+	if (p1.x < p2.x)
+		dir.x = 1;
+	else
+		dir.x = -1;
+	if (p1.y < p2.y)
+		dir.y = 1;
+	else
+		dir.y = -1;
+	return (dir);
 }
 
-void	plot_line(t_mlx_data *data, t_node_bi point_a, t_node_bi point_b)
+void plot_line(t_mlx_data *data, t_matrix *p1, t_matrix *p2)
 {
-	if (abs(point_b.y - point_a.y) < abs(point_b.x - point_a.x))
+	t_node_bi	delta;
+	t_node_bi	dir;
+	t_node_bi	cur;
+	int			err;
+	int			e2;
+
+	cur = p1->pj_cor;
+	delta = get_delta(p1->pj_cor, p2->pj_cor);
+	dir = get_direction(p1->pj_cor, p2->pj_cor);
+	err = delta.x + delta.y;
+	while (!(cur.x == p2->pj_cor.x && cur.y == p2->pj_cor.y))
 	{
-		if (point_a.x > point_b.x) {
-			plot_line_low(data, point_b.x, point_b.y, point_a.x, point_a.y);
-		} else {
-			plot_line_low(data, point_a.x, point_a.y, point_b.x, point_b.y);
+		color_pixel(data, cur.x, cur.y, get_color(p1, p2, cur));
+		e2 = 2 * err;
+		if (e2 >= delta.y)
+		{
+			err += delta.y;
+			cur.x += dir.x;
 		}
-	} else
-	{
-		if (point_a.y > point_b.y) {
-			plot_line_high(data, point_b.x, point_b.y, point_a.x, point_a.y);
-		} else {
-			plot_line_high(data, point_a.x, point_a.y, point_b.x, point_b.y);
+		if (e2 <= delta.x)
+		{
+			err += delta.x;
+			cur.y += dir.y;
 		}
 	}
 }
-
-/* void draw_grid(t_mlx_data *data)
-{
-	t_matrix *rp;
-	t_matrix *rp1;
-	t_matrix *dp;
-	t_matrix *dp1;
-	
-	color_background(data, 0x000000);
-	dp = data->map; 
-	while (dp)
-	{
-		rp = dp;
-		while (rp)
-		{
-			rp1 = rp->right;
-			dp1 = rp->down;
-			if (rp1)
-				plot_line(data, rp->proj_coordinates,  rp1->proj_coordinates);
-			if (dp1)
-				plot_line(data, rp->proj_coordinates, dp1->proj_coordinates);
-			rp = rp1;
-		}
-		dp = dp->down;
-	}
-} */

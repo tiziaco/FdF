@@ -6,7 +6,7 @@
 #    By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 11:38:10 by tiacovel          #+#    #+#              #
-#    Updated: 2024/01/12 16:33:53 by tiacovel         ###   ########.fr        #
+#    Updated: 2024/01/17 13:37:43 by tiacovel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT	= lib/libft/libft.a
 
 SRC =	src/main.c src/handle_events.c src/map.c  src/draw.c \
 		src/matrix.c src/lst_utils.c src/utils.c src/transform.c \
-		src/view.c
+		src/view.c src/color.c
 
 OBJ	= $(SRC:.c=.o)
 
