@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:20:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 10:53:34 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:11:37 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@
 		dp = dp->down;
 	}
 } */
-
-static float	deg_to_rad(float degrees)
-{
-	return (degrees * (M_PI / 180.0));
-}
 
 static void rotate_nodes(t_node_tri *coor, float alpha, float beta, float gamma)
 {

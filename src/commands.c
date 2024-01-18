@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:16:22 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/17 16:30:02 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:52:43 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,20 @@ void draw_grid(t_mlx_data *data)
 	}
 }
 
-void	rotate(t_mlx_data *data, int rot_x, int rot_y, int rot_z)
+void	rotate(t_mlx_data *data, int keysym)
 {
-	if (rot_x != 0)
-		data->view.rot_x += 2 * rot_x;
-	else if (rot_y != 0)
-		data->view.rot_y += 2 * rot_y;
-	else if (rot_z != 0)
-		data->view.rot_z += 2 * rot_z;
+	if (keysym == XK_q)
+		data->view.rot_z += -1;
+	else if (keysym == XK_e)
+		data->view.rot_z += 1;
+	else if (keysym == XK_w)
+		data->view.rot_x += -1;
+	else if (keysym == XK_s)
+		data->view.rot_x += 1;
+	else if (keysym == XK_a)
+		data->view.rot_y += -1;
+	else if (keysym == XK_d)
+		data->view.rot_y += 1;
 	transform_nodes(data->map, data->view, data->origin);
 	draw_grid(data);
 }
@@ -64,22 +70,16 @@ void	zoom(t_mlx_data *data, int direction)
 	draw_grid(data);
 }
 
-void	move(t_mlx_data *data, int tr_x, int tr_y)
+void	move(t_mlx_data *data, int keysym)
 {
-	if (tr_x != 0)
-		data->origin.x0 += 5 * tr_x;
-	else if (tr_y != 0)
-		data->origin.y0 += 5 * tr_y;
+	if (keysym == XK_Up)
+		data->origin.y0 += 5;
+	else if (keysym == XK_Down)
+		data->origin.y0 -= 5;
+	else if (keysym == XK_Right)
+		data->origin.x0 += 5;
+	else if (keysym == XK_Left)
+		data->origin.x0 -= 5;
 	transform_nodes(data->map, data->view, data->origin);
 	draw_grid(data);
-}
-
-void	destroy_window(t_mlx_data *data)
-{
-	ft_printf("Quitting the program... \n\n");
-	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	free_matrix(data->map);
-	exit (EXIT_SUCCESS);
 }

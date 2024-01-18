@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:38:11 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/11 13:22:58 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:16:07 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,6 @@ void	add_raw(t_raw **raws, t_raw *new_node)
 	last->next = new_node;
 }
 
-static void	free_raw_data(char **data)
-{
-	int	i;
-
-	i = 0;
-	while (data[i] != NULL)
-	{
-		free(data[i]);
-		i++;
-	}
-	free(data);
-}
-
 void	free_raws(t_raw *raws)
 {
 	t_raw	*temp;
@@ -62,13 +49,13 @@ void	free_raws(t_raw *raws)
 	{
 		temp = raws;
 		raws = raws->next;
-		free_raw_data(temp->data);
+		free_split(temp->data);
 		free(temp);
 	}
 	free(raws);
 }
 
-/* int	count_rows(t_raw *lst)
+int	count_rows(t_raw *lst)
 {
 	int		size;
 	t_raw	*ptr;
@@ -81,4 +68,4 @@ void	free_raws(t_raw *raws)
 		ptr = ptr->next;
 	}
 	return (size);
-} */
+}

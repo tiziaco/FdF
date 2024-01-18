@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/17 17:02:59 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:11:27 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void		transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
 
 t_raw	*read_map(char *file_path);
 int		ft_hexstr_int(const char *hexstr);
+float	deg_to_rad(float degrees);
 
 int		handle_keyboard_input(int keysym, t_mlx_data *data);
 int		handle_mouse_input(int keysym, t_mlx_data *data);
@@ -130,9 +131,12 @@ void	color_background(t_mlx_data *data, int color);
 void	plot_line(t_mlx_data *data, t_matrix *p1, t_matrix *p2);
 void	draw_grid(t_mlx_data *data);
 
-void	rotate(t_mlx_data *data, int rot_x, int rot_y, int rot_z);
-void	zoom(t_mlx_data *data, int direction);
-void	move(t_mlx_data *data, int tr_x, int tr_y);
+void	display_window(t_mlx_data data);
 void	destroy_window(t_mlx_data *data);
+void	print_instruction(t_mlx_data *data);
+
+void	rotate(t_mlx_data *data, int keysym);
+void	zoom(t_mlx_data *data, int direction);
+void	move(t_mlx_data *data, int keysym);
 
 #endif

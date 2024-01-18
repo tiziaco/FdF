@@ -6,50 +6,13 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:52:53 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/17 16:44:33 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:44:41 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int	count_rows(t_raw *lst)
-{
-	int		size;
-	t_raw	*ptr;
-
-	size = 0;
-	ptr = lst;
-	while (ptr != NULL)
-	{
-		size++;
-		ptr = ptr->next;
-	}
-	return (size);
-}
-
-void	free_matrix(t_matrix *matrix)
-{
-	t_matrix	*row;
-	t_matrix	*current_row;
-	t_matrix	*current;
-	t_matrix	*next;
-
-	row = matrix;
-	while (row != NULL)
-	{
-		current_row = row;
-		row = row->down;
-		current = current_row;
-		while (current != NULL) 
-		{
-			next = current->right;
-			free(current);
-			current = next;
-		}
-	}
-}
-
-void print_matrix(t_matrix *head)
+/* void print_matrix(t_matrix *head)
 {
 	t_matrix *rp;
 	t_matrix *dp ;
@@ -66,9 +29,9 @@ void print_matrix(t_matrix *head)
 		printf("\n");
 		dp = dp->down;
 	}
-}
+} */
 
-void print_color(t_matrix *head)
+/* void print_color(t_matrix *head)
 {
 	t_matrix *rp;
 	t_matrix *dp ;
@@ -86,20 +49,7 @@ void print_color(t_matrix *head)
 		dp = dp->down;
 	}
 	printf("\n");
-}
-
-void	free_split(char **data)
-{
-	int	i;
-
-	i = 0;
-	while (data[i] != NULL)
-	{
-		free(data[i]);
-		i++;
-	}
-	free(data);
-}
+} */
 
 static char	**parse_data_point(char *node_data)
 {
@@ -221,7 +171,5 @@ t_matrix	*convert_raws_to_matrix(char *file_path)
 	connect_rows(head, y);
 	free_raws(raws);
 	free(head);
-	/* printf("\n*** Object coordinates ***\n");
-	print_color(matrix_head); */
 	return (matrix_head);
 }
