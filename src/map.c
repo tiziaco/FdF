@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:41:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/11 16:16:59 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:19:08 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	check_map(t_raw *raws)
 	}
 	while (raw != NULL && raw->next != NULL)
 	{
-		//ft_printf("ook");
 		if (count_columns(raw) != count_columns(raw->next))
 		{
 			ft_printf("Number of columns incorrect.\n");

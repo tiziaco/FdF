@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:52:53 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 11:44:41 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:41:22 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ static t_matrix	*create_row(char **row_data, int y, t_matrix **mainhead)
 	return (row_head);
 }
 
-t_matrix	*convert_raws_to_matrix(char *file_path)
+t_matrix	*import_map(char *file_path)
 {
 	t_matrix	*matrix_head;
 	t_raw		*current_row;

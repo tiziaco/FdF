@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:50:49 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 19:12:05 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:05:22 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,19 @@ void	print_instruction(t_mlx_data *data)
 	mlx = data->mlx_ptr;
 	win = data->mlx_win;
 	mlx_string_put(mlx, win, 65, y += 20, TEXT_COLOR, "FdF - Commands");
-	mlx_string_put(mlx, win, 15, y += 35, TEXT_COLOR, "Zoom: Scroll or +/-");
+	mlx_string_put(mlx, win, 15, y += 35, TEXT_COLOR, "Zoom:");
+	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "In: - 1");
+	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Out - 2");
 	mlx_string_put(mlx, win, 15, y += 30, TEXT_COLOR, "Move:");
-	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "X-Axis - Lft/Right arrows");
-	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Y-Axis - Up/Down arrows");
+	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "X-Axis - Lft/Right");
+	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Y-Axis - Up/Down ");
 	mlx_string_put(mlx, win, 15, y += 30, TEXT_COLOR, "Rotate:");
 	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "X-Axis - W/S");
 	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Y-Axis - A/D");
 	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Z-Axis - Q/E");
+	mlx_string_put(mlx, win, 15, y += 30, TEXT_COLOR, "Z-Scale:");
+	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Increase - H");
+	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Decrease - L");
 	mlx_string_put(mlx, win, 15, y += 30, TEXT_COLOR, "Projection");
 	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "ISO: I Key");
 	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Parallel: P Key");

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:23:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 19:15:19 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:25:49 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ int	handle_keyboard_input(int keysym, t_mlx_data *data)
 		keysym == XK_a || keysym == XK_d)
 		rotate(data, keysym);
 	else if (keysym == XK_Up || keysym == XK_Down ||
-		keysym == XK_Right || keysym == XK_Left)
+			keysym == XK_Right || keysym == XK_Left)
 		move(data, keysym);
-	else if (keysym == XK_plus)
-		zoom(data, 1);
-	else if (keysym == XK_minus)
-		zoom(data, -1);
+	else if (keysym == XK_1 || keysym == XK_2)
+		zoom(data, keysym);
+	else if (keysym == XK_i || keysym == XK_p)
+		change_projection(data, keysym);
+	else if (keysym == XK_h || keysym == XK_l)
+		z_scale(data, keysym);
 	else if (keysym == XK_Escape)
 		destroy_window(data);
 	ft_printf("The %d key has been pressed\n\n", keysym);
@@ -35,11 +37,11 @@ int	handle_keyboard_input(int keysym, t_mlx_data *data)
 
 int	handle_mouse_input(int keysym, t_mlx_data *data)
 {
-	//(void)data;
-	if (keysym == 4)
+	(void)data;
+	/* if (keysym == 4)
 		zoom(data, -1);
 	else if (keysym == 5)
-		zoom(data, 1);
+		zoom(data, 1); */
 	ft_printf("The %d key has been pressed\n\n", keysym);
 	return (0);
 }

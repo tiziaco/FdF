@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:20:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 12:11:37 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:54:28 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,27 @@ static void rotate_nodes(t_node_tri *coor, float alpha, float beta, float gamma)
 	}
 }
 
+static void	iso_projection(t_node_tri *coor)
+{
+	int previous_x;
+	int previous_y;
+
+	previous_x = coor->x;
+	previous_y = coor->y;
+	coor->x = (previous_x - previous_y) * cos(0.523599);
+	coor->y = -coor->z + (previous_x + previous_y) * sin(0.523599);
+}
+
 static void	get_projected_coord(t_matrix *matrix, t_view view, t_origin origin)
 {
 	t_node_tri	new_node;
 
 	new_node.x = matrix->x * view.zoom;
 	new_node.y = matrix->y * view.zoom;
-	new_node.z = matrix->z * view.zoom * 0.5;
+	new_node.z = matrix->z * view.zoom * view.z_factor;
 	rotate_nodes(&new_node, deg_to_rad(view.rot_x), deg_to_rad(view.rot_y), deg_to_rad(view.rot_z));
+	if (view.projection == ISO)
+		iso_projection(&new_node);
 	matrix->pj_cor.x = new_node.x + origin.x0;
 	matrix->pj_cor.y = new_node.y + origin.y0;
 }

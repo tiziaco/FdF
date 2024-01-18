@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 18:56:42 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:12:49 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@
 # define BASE_COLOR_DOWN	"0xE136FF"
 # define TEXT_COLOR			0xffffff
 
+typedef enum
+{
+	ISO,
+	PARALLEL
+}	t_projection;
+
 typedef struct	s_color
 {
 	int	r;
@@ -59,10 +65,12 @@ typedef struct	s_node_tri
 
 typedef struct s_view
 {
-	int	rot_x;
-	int	rot_y;
-	int	rot_z;
-	int	zoom;
+	int				rot_x;
+	int				rot_y;
+	int				rot_z;
+	int				zoom;
+	double			z_factor;
+	t_projection	projection;
 } t_view;
 
 typedef struct s_origin
@@ -112,7 +120,7 @@ void	add_raw(t_raw **raws, t_raw *new_node);
 void	free_raws(t_raw *raws);
 int		count_rows(t_raw *lst);
 
-t_matrix	*convert_raws_to_matrix(char *file_path);
+t_matrix	*import_map(char *file_path);
 void		free_matrix(t_matrix *matrix);
 void		free_split(char **data);
 void		transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
@@ -136,7 +144,9 @@ void	destroy_window(t_mlx_data *data);
 void	print_instruction(t_mlx_data *data);
 
 void	rotate(t_mlx_data *data, int keysym);
-void	zoom(t_mlx_data *data, int direction);
+void	zoom(t_mlx_data *data, int keysym);
 void	move(t_mlx_data *data, int keysym);
+void	z_scale(t_mlx_data *data, int keysym);
+void	change_projection(t_mlx_data *data, int keysym);
 
 #endif
