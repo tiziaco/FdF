@@ -6,7 +6,7 @@
 #    By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/20 18:33:34 by tiacovel          #+#    #+#              #
-#    Updated: 2024/01/04 17:08:53 by tiacovel         ###   ########.fr        #
+#    Updated: 2024/01/18 16:57:33 by tiacovel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ B_OBJS			= $(B_SRCS:.c=.o)
 	
 CC				= cc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -fPIE
 NAME			= libft.a
 
 all: $(NAME)

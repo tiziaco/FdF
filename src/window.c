@@ -6,40 +6,40 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:50:49 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 12:07:32 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:12:05 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	display_window(t_mlx_data data)
+void	display_window(t_mlx_data *data)
 {
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == NULL)
+	data->mlx_ptr = mlx_init();
+	if (data->mlx_ptr == NULL)
 		exit (MLX_ERROR);
-	data.mlx_win = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FdF");
-	data.img.img_ptr = mlx_new_image(data.mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
-	data.img.img_pixels_ptr = mlx_get_data_addr(data.img.img_ptr,
-												&data.img.bits_per_pixel,
-												&data.img.line_len,
-												&data.img.endian);
-	if (data.mlx_win == NULL)
+	data->mlx_win = mlx_new_window(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "FdF");
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
+	data->img.img_pixels_ptr = mlx_get_data_addr(data->img.img_ptr,
+												&data->img.bits_per_pixel,
+												&data->img.line_len,
+												&data->img.endian);
+	if (data->mlx_win == NULL)
 	{
-		mlx_destroy_display(data.mlx_ptr);
-		free(data.mlx_ptr);
-		free_matrix(data.map);
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+		free_matrix(data->map);
 		exit (MLX_ERROR);
 	}
-	transform_nodes(data.map, data.view, data.origin);
-	draw_grid(&data);
-	mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, 
-							data.img.img_ptr, 200, 0);
-	print_instruction(&data);
-	mlx_key_hook(data.mlx_win, handle_keyboard_input, &data);
-	mlx_mouse_hook(data.mlx_win, handle_mouse_input, &data);
-	//mlx_hook(data.mlx_win, 2, 0, handle_keyboard_input, &data);
-	mlx_hook(data.mlx_win, 17, 0, handle_close_button, &data);
-	mlx_loop(data.mlx_ptr);
+	transform_nodes(data->map, data->view, data->origin);
+	draw_grid(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, 
+							data->img.img_ptr, 200, 0);
+	print_instruction(data);
+	mlx_key_hook(data->mlx_win, handle_keyboard_input, data);
+	//mlx_hook(data->mlx_win, 2, 0, handle_keyboard_input, data);
+	mlx_hook(data->mlx_win, 17, 0, handle_close_button, data);
+	mlx_mouse_hook(data->mlx_win, handle_mouse_input, data);
+	mlx_loop(data->mlx_ptr);
 }
 
 void	destroy_window(t_mlx_data *data)

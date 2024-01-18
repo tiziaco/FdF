@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 12:11:27 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:56:42 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	color_background(t_mlx_data *data, int color);
 void	plot_line(t_mlx_data *data, t_matrix *p1, t_matrix *p2);
 void	draw_grid(t_mlx_data *data);
 
-void	display_window(t_mlx_data data);
+void	display_window(t_mlx_data *data);
 void	destroy_window(t_mlx_data *data);
 void	print_instruction(t_mlx_data *data);
 

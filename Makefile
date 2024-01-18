@@ -6,7 +6,7 @@
 #    By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 11:38:10 by tiacovel          #+#    #+#              #
-#    Updated: 2024/01/18 12:06:46 by tiacovel         ###   ########.fr        #
+#    Updated: 2024/01/18 18:39:08 by tiacovel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,12 +33,12 @@ endif
 
 all: $(NAME)
 
+src/%.o: src/%.c
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
 $(NAME): $(OBJ)
 		@make -C lib/libft
 		$(CC) $(OBJ) -Llib/mlx_linux -lmlx_Linux -L/usr/lib -Llib/libft -lft -Ilib/mlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-
-src/%.o: src/%.c
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 macos: $(OBJ)
 	@echo "Checking if libft.a exists: $(wildcard $(LIBFT_DIR)/libft.a)"

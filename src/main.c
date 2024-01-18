@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:33:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 11:54:06 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:05:22 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int	main()
 {
 	t_mlx_data	data;
 
-	data.map = convert_raws_to_matrix("/Users/tizianoiacovelli/42berlin/core_curriculum/FdF/test_maps/elem-fract.fdf");
+	//data.map = convert_raws_to_matrix("/Users/tizianoiacovelli/42berlin/core_curriculum/FdF/test_maps/elem-fract.fdf");
+	data.map = convert_raws_to_matrix("/home/tiacovel/core_curriculum/FdF/test_maps/42.fdf");
 	set_default_view(&data);
-	display_window(data);
+	display_window(&data);
 	return (0);
 }

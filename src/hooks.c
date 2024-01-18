@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_events.c                                    :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:23:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 11:35:01 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:15:19 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	handle_keyboard_input(int keysym, t_mlx_data *data)
 
 int	handle_mouse_input(int keysym, t_mlx_data *data)
 {
-	(void)data;
-	/* if (keysym == 4)
+	//(void)data;
+	if (keysym == 4)
 		zoom(data, -1);
 	else if (keysym == 5)
-		zoom(data, 1); */
+		zoom(data, 1);
 	ft_printf("The %d key has been pressed\n\n", keysym);
 	return (0);
 }
