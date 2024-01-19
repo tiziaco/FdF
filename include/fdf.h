@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 22:12:49 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:24:43 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,12 +120,12 @@ void	add_raw(t_raw **raws, t_raw *new_node);
 void	free_raws(t_raw *raws);
 int		count_rows(t_raw *lst);
 
-t_matrix	*import_map(char *file_path);
+void	import_map(t_mlx_data *data, char *file_path);
 void		free_matrix(t_matrix *matrix);
 void		free_split(char **data);
 void		transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
 
-t_raw	*read_map(char *file_path);
+t_raw	*read_map(t_mlx_data *data, char *file_path);
 int		ft_hexstr_int(const char *hexstr);
 float	deg_to_rad(float degrees);
 

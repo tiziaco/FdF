@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:41:34 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 12:19:08 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:58:11 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 static int	count_columns(t_raw *raws)
 {
-    int	count;
+	int	count;
 
-    count = 0;
-    while (raws->data[count] != NULL)
-        count++;
-    return (count);
+	count = 0;
+	while (raws->data[count] != NULL)
+		count++;
+	return (count);
 }
 
-static void	check_map(t_raw *raws)
+static void	check_map(t_mlx_data *data, t_raw *raws)
 {
 	t_raw	*raw;
 
@@ -32,7 +32,7 @@ static void	check_map(t_raw *raws)
 	{
 		ft_printf("Number of raws insufficient.\n");
 		free_raws(raws);
-		exit (EXIT_FAILURE);
+		destroy_window(data);
 	}
 	while (raw != NULL && raw->next != NULL)
 	{
@@ -40,7 +40,7 @@ static void	check_map(t_raw *raws)
 		{
 			ft_printf("Number of columns incorrect.\n");
 			free_raws(raws);
-			exit (EXIT_FAILURE);
+			destroy_window(data);
 		}
 		raw = raw->next;
 	}
@@ -71,7 +71,7 @@ static t_raw	*initialize_map(int fd)
 	return (raws);
 }
 
-t_raw	*read_map(char *file_path)
+t_raw	*read_map(t_mlx_data *data, char *file_path)
 {
 	int		fd;
 	t_raw	*raws;
@@ -81,10 +81,10 @@ t_raw	*read_map(char *file_path)
 	{
 		ft_printf("ERROR: please check the file name!");
 		close(fd);
-		exit (EXIT_FAILURE);
+		destroy_window(data);
 	}
 	raws = initialize_map(fd);
-	check_map(raws);
+	check_map(data, raws);
 	return (raws);
 }
 
