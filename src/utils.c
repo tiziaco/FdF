@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:33:14 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/19 16:33:56 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:34:19 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_hexstr_int(const char *hexstr)
 
 	if (hexstr == NULL || hexstr[0] == '\0')
 	{
-		printf("Error: Invalid hex string\n");
+		ft_printf("Error: Invalid hex string\n");
 		return (-1);
 	}
 	if (hexstr[0] == '0' && (hexstr[1] == 'x' || hexstr[1] == 'X'))
@@ -43,7 +43,7 @@ int	ft_hexstr_int(const char *hexstr)
 		digit_value = char_int(*hexstr);
 		if (digit_value == -1)
 		{
-			printf("Error: Invalid hex character '%c'\n", *hexstr);
+			ft_printf("Error: Invalid hex character '%c'\n", *hexstr);
 			return (-1);
 		}
 		result = (result << 4) | digit_value;
