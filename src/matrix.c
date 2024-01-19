@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:52:53 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/19 16:24:52 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:46:44 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static char	**parse_data_point(char *node_data)
 
 	data = (char **)malloc(2 * sizeof(char *));
 	if (!data)
-		return NULL;
-	if(ft_strchr(node_data, ',') == NULL)
+		return (NULL);
+	if (ft_strchr(node_data, ',') == NULL)
 	{
 		data[0] = ft_strdup(node_data);
 		if (ft_atoi(data[0]) > 0)
@@ -91,7 +91,7 @@ static t_matrix	*new_node(int x, int y, char *node_data)
 	node->x = x;
 	node->y = y;
 	node->z = ft_atoi(parsed_data[0]);
-	node->color =  ft_hexstr_int(parsed_data[1]);
+	node->color = ft_hexstr_int(parsed_data[1]);
 	node->right = NULL;
 	node->down = NULL;
 	free(parsed_data[0]);
@@ -133,7 +133,7 @@ static t_matrix	*create_row(char **row_data, int y, t_matrix **mainhead)
 	x = 0;
 	while (row_data[x] != NULL) 
 	{
-		new_ptr = new_node(x, y, row_data[x]);;
+		new_ptr = new_node(x, y, row_data[x]);
 		if (!(*mainhead))
 			(*mainhead) = new_ptr;
 		if (!row_head)
@@ -148,15 +148,15 @@ static t_matrix	*create_row(char **row_data, int y, t_matrix **mainhead)
 
 void	import_map(t_mlx_data *data, char *file_path)
 {
+	t_matrix	**head;
 	t_matrix	*matrix_head;
 	t_raw		*current_row;
-	char		**raw_data;
-	int			y;
 	t_raw		*raws;
+	int			y;
 
 	data->map = NULL;
 	raws = read_map(data, file_path);
-	t_matrix **head = (t_matrix **)malloc(count_rows(raws) * sizeof(t_matrix *));
+	head = (t_matrix **)malloc(count_rows(raws) * sizeof(t_matrix *));
 	if (!head)
 		destroy_window(data);
 	y = 0;
@@ -164,8 +164,7 @@ void	import_map(t_mlx_data *data, char *file_path)
 	current_row = raws;
 	while (current_row != NULL)
 	{
-		raw_data = current_row->data;
-		head[y] = create_row(raw_data, y, &matrix_head);
+		head[y] = create_row(current_row->data, y, &matrix_head);
 		y++;
 		current_row = current_row->next;
 	}

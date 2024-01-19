@@ -6,29 +6,54 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:50:49 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/19 16:25:55 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:49:28 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void destroy_window(t_mlx_data *data)
+void	draw_grid(t_mlx_data *data)
 {
-    ft_printf("Quitting the program... \n\n");
-    if (data->img.img_ptr != NULL)
-        mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
-    if (data->mlx_win != NULL)
-        mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-    if (data->mlx_ptr != NULL)
-        mlx_destroy_display(data->mlx_ptr);
-    if (data->mlx_ptr != NULL)
-        free(data->mlx_ptr);
-    if (data->map != NULL)
-        free_matrix(data->map);
-    free(data);
-    exit(EXIT_SUCCESS);
+	t_matrix	*rp;
+	t_matrix	*rp1;
+	t_matrix	*dp;
+	t_matrix	*dp1;
+
+	color_background(data, BACKGROUND_COLOR);
+	dp = data->map; 
+	while (dp)
+	{
+		rp = dp;
+		while (rp)
+		{
+			rp1 = rp->right;
+			dp1 = rp->down;
+			if (rp1)
+				plot_line(data, rp, rp1);
+			if (dp1)
+				plot_line(data, rp, dp1);
+			rp = rp1;
+		}
+		dp = dp->down;
+	}
 }
 
+void	destroy_window(t_mlx_data *data)
+{
+	ft_printf("Quitting the program... \n\n");
+	if (data->img.img_ptr != NULL)
+		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
+	if (data->mlx_win != NULL)
+		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
+	if (data->mlx_ptr != NULL)
+		mlx_destroy_display(data->mlx_ptr);
+	if (data->mlx_ptr != NULL)
+		free(data->mlx_ptr);
+	if (data->map != NULL)
+		free_matrix(data->map);
+	free(data);
+	exit(EXIT_SUCCESS);
+}
 
 void	print_instruction(t_mlx_data *data)
 {

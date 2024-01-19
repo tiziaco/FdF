@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/19 16:24:43 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:25:11 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <mlx.h>
 # include <X11/keysym.h>
 # include "../include/libft.h"
-
-#include <stdio.h> // Da togliere!!
 
 # define WIN_NAME	"Fdf - Display"
 # define WIN_WIDTH	1000
@@ -37,31 +35,31 @@
 # define BASE_COLOR_DOWN	"0xE136FF"
 # define TEXT_COLOR			0xffffff
 
-typedef enum
+typedef enum e_projection
 {
 	ISO,
 	PARALLEL
 }	t_projection;
 
-typedef struct	s_color
+typedef struct s_color
 {
 	int	r;
 	int	g;
 	int	b;
-} t_color;
+}	t_color;
 
-typedef struct	s_node_bi
+typedef struct s_node_bi
 {
 	int	x;
 	int	y;
-} t_node_bi;
+}	t_node_bi;
 
-typedef struct	s_node_tri
+typedef struct s_node_tri
 {
-	int x;
-	int y;
-	int z;
-} t_node_tri;
+	int	x;
+	int	y;
+	int	z;
+}	t_node_tri;
 
 typedef struct s_view
 {
@@ -71,21 +69,21 @@ typedef struct s_view
 	int				zoom;
 	double			z_factor;
 	t_projection	projection;
-} t_view;
+}	t_view;
 
 typedef struct s_origin
 {
 	int	x0;
 	int	y0;
-} t_origin;
+}	t_origin;
 
-typedef struct	s_raw
+typedef struct s_raw
 {
 	char			**data;
 	struct s_raw	*next;
-} t_raw;
+}	t_raw;
 
-typedef struct	s_node
+typedef struct s_node
 {
 	int				x;
 	int				y;
@@ -94,18 +92,18 @@ typedef struct	s_node
 	int				color;
 	struct s_node	*right;
 	struct s_node	*down;
-} t_matrix;
+}	t_matrix;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img_ptr;
 	char	*img_pixels_ptr;
 	int		bits_per_pixel;
 	int		endian;
 	int		line_len;
-} t_img;
+}	t_img;
 
-typedef struct	data_s
+typedef struct data_s
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
@@ -121,9 +119,9 @@ void	free_raws(t_raw *raws);
 int		count_rows(t_raw *lst);
 
 void	import_map(t_mlx_data *data, char *file_path);
-void		free_matrix(t_matrix *matrix);
-void		free_split(char **data);
-void		transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
+void	free_matrix(t_matrix *matrix);
+void	free_split(char **data);
+void	transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
 
 t_raw	*read_map(t_mlx_data *data, char *file_path);
 int		ft_hexstr_int(const char *hexstr);
@@ -139,7 +137,6 @@ void	color_background(t_mlx_data *data, int color);
 void	plot_line(t_mlx_data *data, t_matrix *p1, t_matrix *p2);
 void	draw_grid(t_mlx_data *data);
 
-void	display_window(t_mlx_data *data);
 void	destroy_window(t_mlx_data *data);
 void	print_instruction(t_mlx_data *data);
 

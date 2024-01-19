@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 14:23:43 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 22:25:49 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:40:22 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	handle_keyboard_input(int keysym, t_mlx_data *data)
 {
-	if (keysym == XK_q || keysym == XK_e ||
-		keysym == XK_w || keysym == XK_s ||
-		keysym == XK_a || keysym == XK_d)
+	if (keysym == XK_q || keysym == XK_e
+		|| keysym == XK_w || keysym == XK_s
+		|| keysym == XK_a || keysym == XK_d)
 		rotate(data, keysym);
-	else if (keysym == XK_Up || keysym == XK_Down ||
-			keysym == XK_Right || keysym == XK_Left)
+	else if (keysym == XK_Up || keysym == XK_Down
+		|| keysym == XK_Right || keysym == XK_Left)
 		move(data, keysym);
 	else if (keysym == XK_1 || keysym == XK_2)
 		zoom(data, keysym);
@@ -31,17 +31,13 @@ int	handle_keyboard_input(int keysym, t_mlx_data *data)
 		destroy_window(data);
 	ft_printf("The %d key has been pressed\n\n", keysym);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, 
-							data->img.img_ptr, 200, 0);
+		data->img.img_ptr, 200, 0);
 	return (0);
 }
 
 int	handle_mouse_input(int keysym, t_mlx_data *data)
 {
 	(void)data;
-	/* if (keysym == 4)
-		zoom(data, -1);
-	else if (keysym == 5)
-		zoom(data, 1); */
 	ft_printf("The %d key has been pressed\n\n", keysym);
 	return (0);
 }

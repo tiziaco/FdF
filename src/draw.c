@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:39:27 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/17 15:32:07 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:33:30 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	color_pixel(t_mlx_data *data, int x, int y, int color)
 {
-	int	offset;
+	int	offs;
 
 	if ((x < IMG_WIDTH && y < IMG_HEIGHT) && (x > 0 && y > 0))
 	{
-		offset = (data->img.line_len * y) + (x * (data->img.bits_per_pixel / 8));	
-		*((unsigned int *)(offset + data->img.img_pixels_ptr)) = color;
+		offs = (data->img.line_len * y) + (x * (data->img.bits_per_pixel / 8));
+		*((unsigned int *)(offs + data->img.img_pixels_ptr)) = color;
 	}
 }
 
@@ -29,7 +29,7 @@ void	color_background(t_mlx_data *data, int color)
 	int	y;
 
 	y = 0;
-	while (y < IMG_HEIGHT)	
+	while (y < IMG_HEIGHT)
 	{
 		x = 0;
 		while (x < IMG_WIDTH)
@@ -44,6 +44,7 @@ void	color_background(t_mlx_data *data, int color)
 static t_node_bi	get_delta(t_node_bi p1, t_node_bi p2)
 {
 	t_node_bi	delta;
+
 	delta.x = abs(p2.x - p1.x);
 	delta.y = -abs(p2.y - p1.y);
 	return (delta);
@@ -52,6 +53,7 @@ static t_node_bi	get_delta(t_node_bi p1, t_node_bi p2)
 static t_node_bi	get_direction(t_node_bi p1, t_node_bi p2)
 {
 	t_node_bi	dir;
+
 	if (p1.x < p2.x)
 		dir.x = 1;
 	else
@@ -63,7 +65,7 @@ static t_node_bi	get_direction(t_node_bi p1, t_node_bi p2)
 	return (dir);
 }
 
-void plot_line(t_mlx_data *data, t_matrix *p1, t_matrix *p2)
+void	plot_line(t_mlx_data *data, t_matrix *p1, t_matrix *p2)
 {
 	t_node_bi	delta;
 	t_node_bi	dir;

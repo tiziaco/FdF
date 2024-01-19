@@ -6,19 +6,19 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:33:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/19 16:10:06 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:20:05 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_mlx_data	*init_mlx()
+t_mlx_data	*init_mlx(void)
 {
 	t_mlx_data	*data;
-	
+
 	data = (t_mlx_data *)malloc(sizeof(t_mlx_data));
 	if (data == NULL)
-        exit (MLX_ERROR);
+		exit (MLX_ERROR);
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
 	{
@@ -41,9 +41,7 @@ void	init_window(t_mlx_data *data)
 	if (data->img.img_ptr == NULL)
 		destroy_window(data);
 	data->img.img_pixels_ptr = mlx_get_data_addr(data->img.img_ptr,
-												&data->img.bits_per_pixel,
-												&data->img.line_len,
-												&data->img.endian);
+			&data->img.bits_per_pixel, &data->img.line_len, &data->img.endian);
 	if (data->img.img_pixels_ptr == NULL)
 		destroy_window(data);
 	mlx_key_hook(data->mlx_win, handle_keyboard_input, data);
@@ -65,10 +63,10 @@ void	init_camera(t_mlx_data *data)
 	transform_nodes(data->map, data->view, data->origin);
 	draw_grid(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, 
-							data->img.img_ptr, 200, 0);
+		data->img.img_ptr, 200, 0);
 }
 
-/* int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_mlx_data	*data;
 
@@ -79,21 +77,24 @@ void	init_camera(t_mlx_data *data)
 	}
 	data = init_mlx();
 	init_window(data);
-	import_map(argv[1]);
-	init_camera(data);
-	mlx_loop(data->mlx_ptr);
-	return (0);
-} */
-
-int	main()
-{
-	t_mlx_data	*data;
-
-	data = init_mlx();
-	init_window(data);
-	//import_map(data, "/Users/tizianoiacovelli/42berlin/core_curriculum/FdF/test_maps/42.fdf");
-	import_map(data, "/home/tiacovel/core_curriculum/FdF/test_maps/42.fdf");
+	import_map(data, argv[1]);
 	init_camera(data);
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }
+
+/* int	main(void)
+{
+	t_mlx_data	*data;
+	char *path;
+
+	path = "/Users/tizianoiacovelli/42berlin/core_curriculum/FdF/test_maps/42.fdf"
+
+	data = init_mlx();
+	init_window(data);
+	//import_map(data, path);
+	import_map(data, "/home/tiacovel/core_curriculum/FdF/test_maps/elem-fract.fdf");
+	init_camera(data);
+	mlx_loop(data->mlx_ptr);
+	return (0);
+} */

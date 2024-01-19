@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:00:30 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/17 15:07:38 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:30:57 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static float	calculate_pct(t_node_bi current, t_node_bi start, t_node_bi end)
 	float	dot_product;
 	float	length_squared;
 
-	dot_product = (current.x - start.x) * (end.x - start.x) + (current.y - start.y) * (end.y - start.y);
-	length_squared = (end.x - start.x) * (end.x - start.x) + (end.y - start.y) * (end.y - start.y);
+	dot_product = (current.x - start.x) * (end.x - start.x) + \
+		(current.y - start.y) * (end.y - start.y);
+	length_squared = (end.x - start.x) * (end.x - start.x) + \
+		(end.y - start.y) * (end.y - start.y);
 	return (dot_product / length_squared);
 }
 
@@ -42,11 +44,11 @@ static int	interpolate_color(int color1, int color2, float t)
 	return (result);
 }
 
-int	get_color(t_matrix *p1, t_matrix *p2, t_node_bi	cur) 
+int	get_color(t_matrix *p1, t_matrix *p2, t_node_bi	cur)
 {
 	float	t;
 	int		color;
-	
+
 	t = calculate_pct(cur, p1->pj_cor, p2->pj_cor);
 	if (t < 0.0)
 		t = 0.0;
@@ -56,7 +58,8 @@ int	get_color(t_matrix *p1, t_matrix *p2, t_node_bi	cur)
 	return (color);
 }
 
-/* int main() {
+/* int main()
+{
 	int a = 10;
 	int b = 20;
 
@@ -64,7 +67,8 @@ int	get_color(t_matrix *p1, t_matrix *p2, t_node_bi	cur)
 	float t = 2;
 	int result = lerp(a, b, t);
 
-	printf("Linear interpolation between %d and %d at t=%f is: %d\n", a, b, t, result);
+	printf("Linear interpolation between %d and %d at t=%f is: %d\n", \
+		a, b, t, result);
 
 	return 0;
 } */

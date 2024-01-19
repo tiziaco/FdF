@@ -6,37 +6,11 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:16:22 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/18 22:25:06 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:38:25 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-void draw_grid(t_mlx_data *data)
-{
-	t_matrix *rp;
-	t_matrix *rp1;
-	t_matrix *dp;
-	t_matrix *dp1;
-
-	color_background(data, BACKGROUND_COLOR);
-	dp = data->map; 
-	while (dp)
-	{
-		rp = dp;
-		while (rp)
-		{
-			rp1 = rp->right;
-			dp1 = rp->down;
-			if (rp1)
-				plot_line(data, rp, rp1);
-			if (dp1)
-				plot_line(data, rp, dp1);
-			rp = rp1;
-		}
-		dp = dp->down;
-	}
-}
 
 void	rotate(t_mlx_data *data, int keysym)
 {
@@ -55,9 +29,9 @@ void	rotate(t_mlx_data *data, int keysym)
 	transform_nodes(data->map, data->view, data->origin);
 	draw_grid(data);
 }
+
 void	zoom(t_mlx_data *data, int keysym)
 {
-
 	if (keysym == XK_1)
 		data->view.zoom -= 2;
 	else if (keysym == XK_2)
