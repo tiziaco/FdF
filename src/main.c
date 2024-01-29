@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:33:16 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/19 17:20:05 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:01:08 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	init_camera(t_mlx_data *data)
 	data->view.rot_x = -45;
 	data->view.rot_y = -20;
 	data->view.rot_z = 20;
-	data->view.zoom = 30;
+	data->view.zoom = calculate_zoom_factor(data);
 	data->origin.x0 = 100;
 	data->origin.y0 = 100;
 	data->view.z_factor = 1;

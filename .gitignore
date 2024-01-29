@@ -10,6 +10,7 @@ OLD/
 main
 *.json
 *.DS*
+mlx_linux
 
 ## Mlx related
 Makefile.gen

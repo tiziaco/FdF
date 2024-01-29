@@ -6,12 +6,11 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:33:14 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/19 17:34:19 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:51:55 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-//#include <stdio.h>
 
 static int	char_int(char c)
 {
@@ -57,39 +56,32 @@ float	deg_to_rad(float degrees)
 	return (degrees * (M_PI / 180.0));
 }
 
-void	free_matrix(t_matrix *matrix)
+t_matrix *get_last_node(t_matrix *head)
 {
-	t_matrix	*row;
-	t_matrix	*current_row;
 	t_matrix	*current;
-	t_matrix	*next;
 
-	row = matrix;
-	while (row != NULL)
-	{
-		current_row = row;
-		row = row->down;
-		current = current_row;
-		while (current != NULL) 
-		{
-			next = current->right;
-			free(current);
-			current = next;
-		}
-	}
+	current = head;
+	while (current->right != NULL)
+		current = current->right;
+	while (current->down != NULL)
+		current = current->down;
+	return (current);
 }
 
-void	free_split(char **data)
+int	calculate_zoom_factor(t_mlx_data *data)
 {
-	int	i;
+	t_matrix	*last;
+	int			max;
+	int			zoom;
 
-	i = 0;
-	while (data[i] != NULL)
-	{
-		free(data[i]);
-		i++;
-	}
-	free(data);
+	last = get_last_node(data->map);
+	max = last->y;
+	if (last->x > last->y)
+		max = last->x;
+	zoom = WIN_WIDTH / (max + 2);
+	if (zoom < 3)
+		return (3);
+	return (zoom);
 }
 
 /* int main() {

@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 11:26:04 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/19 17:25:11 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:53:04 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ void	transform_nodes(t_matrix *matrix, t_view view, t_origin origin);
 t_raw	*read_map(t_mlx_data *data, char *file_path);
 int		ft_hexstr_int(const char *hexstr);
 float	deg_to_rad(float degrees);
+int		calculate_zoom_factor(t_mlx_data *data);
 
 int		handle_keyboard_input(int keysym, t_mlx_data *data);
 int		handle_mouse_input(int keysym, t_mlx_data *data);
