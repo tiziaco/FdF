@@ -6,7 +6,7 @@
 /*   By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 11:50:49 by tiacovel          #+#    #+#             */
-/*   Updated: 2024/01/19 16:49:28 by tiacovel         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:05:50 by tiacovel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	print_instruction(t_mlx_data *data)
 	win = data->mlx_win;
 	mlx_string_put(mlx, win, 65, y += 20, TEXT_COLOR, "FdF - Commands");
 	mlx_string_put(mlx, win, 15, y += 35, TEXT_COLOR, "Zoom:");
-	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "In: - 1");
-	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Out - 2");
+	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Out: - 1");
+	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "In - 2");
 	mlx_string_put(mlx, win, 15, y += 30, TEXT_COLOR, "Move:");
 	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "X-Axis - Lft/Right");
 	mlx_string_put(mlx, win, 50, y += 25, TEXT_COLOR, "Y-Axis - Up/Down ");
