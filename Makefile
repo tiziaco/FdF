@@ -6,7 +6,7 @@
 #    By: tiacovel <tiacovel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/08 11:38:10 by tiacovel          #+#    #+#              #
-#    Updated: 2024/06/04 16:18:35 by tiacovel         ###   ########.fr        #
+#    Updated: 2024/06/04 16:33:39 by tiacovel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,16 +89,6 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
-
-
-# macos: $(OBJ)
-# 	@if [ ! -f $(LIBFT_DIR)/libft.a ]; then \
-#  		echo "Building libft..."; \
-# 		make -C $(LIBFT_DIR); \
-# 	else \
-# 		echo "libft.a already exists, skipping build."; \
-# 	fi
-# 	$(CC) $(OBJ) -g -L /usr/X11/lib -lX11 -lmlx -lXext -Llib/libft -lft -o $(NAME)
 
 clean:
 	@rm -rf $(OBJDIR) $(EXECUTABLE)
